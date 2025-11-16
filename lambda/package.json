@@ -1,0 +1,26 @@
+{
+  "name": "baby-milk-tracker",
+  "version": "1.0.0",
+  "description": "Alexa skill to track baby's milk intake",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test-local.js",
+    "deploy": "zip -r function.zip . -x '*.git*' 'node_modules/@types/*' 'test-local.js' '.env*' && echo 'Package created: function.zip'"
+  },
+  "keywords": [
+    "alexa",
+    "alexa-skill",
+    "baby-tracker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0",
+    "ask-sdk-model": "^1.42.0",
+    "googleapis": "^128.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "dotenv": "^16.3.1"
+  }
+}

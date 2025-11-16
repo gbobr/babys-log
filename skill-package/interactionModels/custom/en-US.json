@@ -1,0 +1,224 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "milk tracker",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "help",
+            "help me",
+            "what can I do",
+            "what can you do"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "RegistrarTomaDePechoIntent",
+          "slots": [],
+          "samples": [
+            "register breastfeeding",
+            "log breastfeeding",
+            "baby breastfed",
+            "baby nursed",
+            "breastfeeding",
+            "nursing",
+            "record breastfeeding",
+            "baby is breastfeeding",
+            "baby is nursing"
+          ]
+        },
+        {
+          "name": "RegistrarBiberonLecheIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "register bottle with breast milk",
+            "log bottle with breast milk",
+            "baby had a bottle with breast milk",
+            "baby had breast milk",
+            "bottle with breast milk",
+            "bottle of breast milk",
+            "register bottle with milk",
+            "log bottle with milk",
+            "bottle with breast milk of {cantidad} milliliters",
+            "bottle with breast milk {cantidad} milliliters",
+            "log bottle with breast milk {cantidad} milliliters",
+            "log bottle with breast milk {cantidad} ml",
+            "register bottle with breast milk {cantidad} milliliters",
+            "register bottle with breast milk {cantidad} ml",
+            "baby had {cantidad} milliliters of breast milk",
+            "baby had breast milk {cantidad} milliliters",
+            "register bottle of {cantidad} milliliters with breast milk",
+            "log {cantidad} ml of breast milk",
+            "bottle of {cantidad} milliliters of breast milk",
+            "bottle of {cantidad} ml of breast milk",
+            "register {cantidad} milliliters of breast milk",
+            "log {cantidad} milliliters of breast milk",
+            "register {cantidad} ml of breast milk",
+            "log {cantidad} ml of breast milk",
+            "{cantidad} milliliters of breast milk",
+            "{cantidad} ml of breast milk",
+            "register {cantidad} of breast milk",
+            "log {cantidad} of breast milk",
+            "breast milk"
+          ]
+        },
+        {
+          "name": "RegistrarBiberonFormulaIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "register bottle with formula",
+            "log bottle with formula",
+            "baby had a bottle with formula",
+            "baby had formula",
+            "bottle with formula",
+            "bottle of formula",
+            "register formula",
+            "log formula",
+            "bottle with formula of {cantidad} milliliters",
+            "bottle with formula {cantidad} milliliters",
+            "log bottle with formula {cantidad} milliliters",
+            "log bottle with formula {cantidad} ml",
+            "register bottle with formula {cantidad} milliliters",
+            "register bottle with formula {cantidad} ml",
+            "baby had {cantidad} milliliters of formula",
+            "baby had formula {cantidad} milliliters",
+            "register bottle of {cantidad} milliliters with formula",
+            "log {cantidad} ml of formula",
+            "bottle of {cantidad} milliliters of formula",
+            "bottle of {cantidad} ml of formula",
+            "register {cantidad} milliliters of formula",
+            "log {cantidad} milliliters of formula",
+            "register {cantidad} ml of formula",
+            "log {cantidad} ml of formula",
+            "{cantidad} milliliters of formula",
+            "{cantidad} ml of formula",
+            "register {cantidad} of formula",
+            "log {cantidad} of formula",
+            "formula"
+          ]
+        },
+        {
+          "name": "RegistrarRegurgitacionIntent",
+          "slots": [],
+          "samples": [
+            "register regurgitation",
+            "log regurgitation",
+            "baby spit up",
+            "baby regurgitated",
+            "baby vomited",
+            "register spit up",
+            "log spit up",
+            "spit up",
+            "regurgitated",
+            "vomited",
+            "baby threw up",
+            "register throw up"
+          ]
+        },
+        {
+          "name": "ActualizarUltimaEntradaIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "duracion",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "update the last entry with {cantidad} milliliters",
+            "update the last feeding with {cantidad} milliliters",
+            "update with {cantidad} milliliters",
+            "modify the last entry with {cantidad} milliliters",
+            "change the last entry to {cantidad} milliliters",
+            "add {cantidad} milliliters to the last entry",
+            "the last one was {cantidad} milliliters",
+            "it was {cantidad} milliliters",
+            "update {cantidad} milliliters",
+            "modify {cantidad} milliliters",
+            "change to {cantidad} milliliters",
+            "actually it was {cantidad} milliliters",
+            "correct to {cantidad} milliliters",
+            "update the last entry with {cantidad} ml",
+            "update with {cantidad} ml",
+            "it was {cantidad} ml",
+            "update the last entry with {duracion} minutes",
+            "update the last feeding with {duracion} minutes",
+            "update with {duracion} minutes",
+            "modify the last entry with {duracion} minutes",
+            "change the last entry to {duracion} minutes",
+            "the last one was {duracion} minutes",
+            "it was {duracion} minutes",
+            "update {duracion} minutes",
+            "it lasted {duracion} minutes",
+            "actually it was {duracion} minutes",
+            "correct to {duracion} minutes"
+          ]
+        },
+        {
+          "name": "ConsultarUltimaTomIntent",
+          "slots": [],
+          "samples": [
+            "what was the last feeding",
+            "last feeding",
+            "when was the last feeding",
+            "when did baby eat",
+            "when did baby feed",
+            "last time baby ate",
+            "last time baby had milk",
+            "what was the last thing baby ate"
+          ]
+        },
+        {
+          "name": "ConsultarResumenDiaIntent",
+          "slots": [],
+          "samples": [
+            "give me today's summary",
+            "summary for today",
+            "today's summary",
+            "how many feedings today",
+            "how many times did baby eat today",
+            "how many times did baby have milk today",
+            "how much has baby eaten today",
+            "what has baby eaten today",
+            "summary",
+            "today's statistics"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "es-ES": {
+          "summary": "Registra las tomas de leche de tu bebé",
+          "examplePhrases": [
+            "Alexa, abre bitácora del bebé",
+            "Alexa, pregunta a bitácora del bebé registra toma de pecho",
+            "Alexa, pregunta a bitácora del bebé dame el resumen del día"
+          ],
+          "keywords": [
+            "bebé",
+            "lactancia",
+            "alimentación",
+            "leche",
+            "bitácora",
+            "registro"
+          ],
+          "name": "Bitácora del Bebé",
+          "description": "Bitácora del Bebé te ayuda a llevar un registro de todas las tomas de tu bebé. Puedes registrar tomas de pecho, biberones con leche materna, y biberones con fórmula. También puedes consultar la última toma y obtener un resumen del día.\n\nCaracterísticas:\n- Registra tomas de pecho\n- Registra biberones con leche materna (con cantidad opcional)\n- Registra biberones con fórmula (con cantidad opcional)\n- Consulta la última toma\n- Obtén un resumen diario de todas las tomas\n\nLos datos se guardan en Google Sheets para que puedas acceder a ellos desde cualquier dispositivo."
+        },
+        "en-US": {
+          "summary": "Track your baby's milk intake",
+          "examplePhrases": [
+            "Alexa, open milk tracker",
+            "Alexa, ask milk tracker to register breastfeeding",
+            "Alexa, ask milk tracker for today's summary"
+          ],
+          "keywords": [
+            "baby",
+            "breastfeeding",
+            "feeding",
+            "milk",
+            "tracker",
+            "tracking"
+          ],
+          "name": "Baby Milk Tracker",
+          "description": "Baby Milk Tracker helps you keep track of all your baby's feedings. You can register breastfeeding, bottles with breast milk, and bottles with formula. You can also check the last feeding and get a daily summary.\n\nFeatures:\n- Register breastfeeding sessions\n- Register bottles with breast milk (with optional amount)\n- Register bottles with formula (with optional amount)\n- Check the last feeding\n- Get a daily summary of all feedings\n\nData is saved to Google Sheets so you can access it from any device."
+        }
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "1. Configure GOOGLE_CREDENTIALS and SPREADSHEET_ID environment variables\n2. Test basic flows: register breastfeeding, register bottle, check last feeding, get daily summary\n3. Test Yes/No confirmations\n4. Test both Spanish and English locales",
+      "category": "HEALTH_AND_FITNESS",
+      "distributionCountries": [
+        "ES",
+        "MX",
+        "AR",
+        "CO",
+        "CL",
+        "PE",
+        "VE",
+        "EC",
+        "GT",
+        "CU",
+        "BO",
+        "DO",
+        "HN",
+        "PY",
+        "SV",
+        "NI",
+        "CR",
+        "PA",
+        "UY",
+        "US"
+      ]
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:YOUR_ACCOUNT_ID:function:baby-milk-tracker"
+        },
+        "interfaces": []
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "es-ES": {
+          "privacyPolicyUrl": "https://example.com/privacy",
+          "termsOfUseUrl": "https://example.com/terms"
+        },
+        "en-US": {
+          "privacyPolicyUrl": "https://example.com/privacy",
+          "termsOfUseUrl": "https://example.com/terms"
+        }
+      }
+    }
+  }
+}

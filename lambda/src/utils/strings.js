@@ -1,0 +1,145 @@
+/**
+ * Localized strings for the Baby Milk Tracker skill
+ * Primary language: Spanish (es-ES)
+ * Prepared for internationalization: English (en-US)
+ */
+
+module.exports = {
+  'es-ES': {
+    WELCOME: '¡Bienvenido a la Bitácora del Bebé! Puedes registrar tomas de pecho, biberones con leche materna o fórmula, y también regurgitaciones. ¿Qué quieres hacer?',
+    WELCOME_REPROMPT: '¿Quieres registrar una toma?',
+
+    // Breastfeeding
+    BREASTFEEDING_CONFIRM: '¿Confirmas que el bebé tomó pecho?',
+    BREASTFEEDING_REGISTERED: 'Perfecto. Toma de pecho registrada a las {time}.',
+    BREASTFEEDING_CANCELLED: 'De acuerdo, no registraré la toma de pecho.',
+
+    // Bottle with human milk
+    BOTTLE_MILK_CONFIRM: '¿Confirmas que el bebé tomó biberón con leche materna{amount}?',
+    BOTTLE_MILK_REGISTERED: 'Perfecto. Biberón con leche materna registrado a las {time}{amount}.',
+    BOTTLE_MILK_CANCELLED: 'De acuerdo, no registraré el biberón con leche materna.',
+
+    // Bottle with formula
+    BOTTLE_FORMULA_CONFIRM: '¿Confirmas que el bebé tomó biberón con fórmula{amount}?',
+    BOTTLE_FORMULA_REGISTERED: 'Perfecto. Biberón con fórmula registrado a las {time}{amount}.',
+    BOTTLE_FORMULA_CANCELLED: 'De acuerdo, no registraré el biberón con fórmula.',
+
+    // Regurgitation
+    REGURGITATION_CONFIRM: '¿Confirmas que el bebé regurgitó?',
+    REGURGITATION_REGISTERED: 'Entendido. Regurgitación registrada a las {time}.',
+    REGURGITATION_CANCELLED: 'De acuerdo, no registraré la regurgitación.',
+
+    // Update last entry
+    UPDATE_AMOUNT_CONFIRM: '¿Confirmas que quieres actualizar {type} a las {time} con {amount} mililitros?',
+    UPDATE_DURATION_CONFIRM: '¿Confirmas que quieres actualizar {type} a las {time} con {duration} minutos?',
+    UPDATE_AMOUNT_SUCCESS: 'Perfecto. Entrada actualizada con {amount} mililitros.',
+    UPDATE_DURATION_SUCCESS: 'Perfecto. Entrada actualizada con {duration} minutos.',
+    UPDATE_CANCELLED: 'De acuerdo, no actualizaré la entrada.',
+    UPDATE_NO_ENTRY: 'No hay entradas para actualizar.',
+    UPDATE_AMOUNT_NOT_BOTTLE: 'La última entrada es {type}, que no tiene cantidad. Solo puedes actualizar biberones con cantidad en mililitros.',
+    UPDATE_DURATION_NOT_BREASTFEEDING: 'La última entrada es {type}, que no tiene duración. Solo puedes actualizar tomas de pecho con duración en minutos.',
+
+    // Query responses
+    LAST_FEEDING: 'La última toma fue {type} a las {time}{amount}.',
+    NO_FEEDINGS_TODAY: 'No hay tomas registradas hoy.',
+    DAILY_SUMMARY: 'Hoy el bebé ha tenido {count} tomas: {details}.',
+
+    // Types for responses
+    TYPE_BREASTFEEDING: 'pecho',
+    TYPE_BOTTLE_MILK: 'biberón con leche materna',
+    TYPE_BOTTLE_FORMULA: 'biberón con fórmula',
+    TYPE_REGURGITATION: 'regurgitación',
+
+    // Amounts and durations
+    AMOUNT_ML: ' de {amount} mililitros',
+    DURATION_MIN: ' de {duration} minutos',
+
+    // Progressive response
+    PROCESSING: 'Un momento, registrando...',
+
+    // Help
+    HELP: 'Puedes registrar tomas diciendo: registra toma de pecho, el bebé tomó biberón con leche materna, anota biberón con fórmula, o registra regurgitación. También puedes preguntar: cuál fue la última toma, o dame el resumen del día. ¿Qué quieres hacer?',
+    HELP_REPROMPT: '¿Qué quieres hacer?',
+
+    // Errors
+    ERROR: 'Lo siento, hubo un problema al procesar tu solicitud. Por favor, intenta de nuevo.',
+    ERROR_SHEETS: 'Lo siento, no pude guardar la información en este momento. Por favor, intenta de nuevo más tarde.',
+    FALLBACK: 'Lo siento, no entendí eso. Puedes decir: registra toma de pecho, anota biberón con leche materna, o dame el resumen del día.',
+
+    // Goodbye
+    GOODBYE: '¡Hasta luego! Cuida bien al bebé.',
+
+    // Yes/No
+    YES: 'sí',
+    NO: 'no'
+  },
+
+  'en-US': {
+    WELCOME: 'Welcome to Baby Milk Tracker! You can register breastfeeding, bottles with breast milk or formula, and also regurgitations. What would you like to do?',
+    WELCOME_REPROMPT: 'Would you like to register a feeding?',
+
+    // Breastfeeding
+    BREASTFEEDING_CONFIRM: 'Do you confirm that baby breastfed?',
+    BREASTFEEDING_REGISTERED: 'Perfect. Breastfeeding registered at {time}.',
+    BREASTFEEDING_CANCELLED: 'Okay, I won\'t register the breastfeeding.',
+
+    // Bottle with human milk
+    BOTTLE_MILK_CONFIRM: 'Do you confirm that baby had a bottle with breast milk{amount}?',
+    BOTTLE_MILK_REGISTERED: 'Perfect. Bottle with breast milk registered at {time}{amount}.',
+    BOTTLE_MILK_CANCELLED: 'Okay, I won\'t register the bottle with breast milk.',
+
+    // Bottle with formula
+    BOTTLE_FORMULA_CONFIRM: 'Do you confirm that baby had a bottle with formula{amount}?',
+    BOTTLE_FORMULA_REGISTERED: 'Perfect. Bottle with formula registered at {time}{amount}.',
+    BOTTLE_FORMULA_CANCELLED: 'Okay, I won\'t register the bottle with formula.',
+
+    // Regurgitation
+    REGURGITATION_CONFIRM: 'Do you confirm that baby spit up?',
+    REGURGITATION_REGISTERED: 'Understood. Regurgitation registered at {time}.',
+    REGURGITATION_CANCELLED: 'Okay, I won\'t register the regurgitation.',
+
+    // Update last entry
+    UPDATE_AMOUNT_CONFIRM: 'Do you confirm you want to update {type} at {time} with {amount} milliliters?',
+    UPDATE_DURATION_CONFIRM: 'Do you confirm you want to update {type} at {time} with {duration} minutes?',
+    UPDATE_AMOUNT_SUCCESS: 'Perfect. Entry updated with {amount} milliliters.',
+    UPDATE_DURATION_SUCCESS: 'Perfect. Entry updated with {duration} minutes.',
+    UPDATE_CANCELLED: 'Okay, I won\'t update the entry.',
+    UPDATE_NO_ENTRY: 'There are no entries to update.',
+    UPDATE_AMOUNT_NOT_BOTTLE: 'The last entry is {type}, which doesn\'t have an amount. You can only update bottles with amount in milliliters.',
+    UPDATE_DURATION_NOT_BREASTFEEDING: 'The last entry is {type}, which doesn\'t have a duration. You can only update breastfeeding with duration in minutes.',
+
+    // Query responses
+    LAST_FEEDING: 'The last feeding was {type} at {time}{amount}.',
+    NO_FEEDINGS_TODAY: 'No feedings registered today.',
+    DAILY_SUMMARY: 'Today baby has had {count} feedings: {details}.',
+
+    // Types for responses
+    TYPE_BREASTFEEDING: 'breastfeeding',
+    TYPE_BOTTLE_MILK: 'bottle with breast milk',
+    TYPE_BOTTLE_FORMULA: 'bottle with formula',
+    TYPE_REGURGITATION: 'regurgitation',
+
+    // Amounts and durations
+    AMOUNT_ML: ' of {amount} milliliters',
+    DURATION_MIN: ' of {duration} minutes',
+
+    // Progressive response
+    PROCESSING: 'One moment, registering...',
+
+    // Help
+    HELP: 'You can register feedings by saying: register breastfeeding, baby had a bottle with breast milk, log formula bottle, or register regurgitation. You can also ask: what was the last feeding, or give me today\'s summary. What would you like to do?',
+    HELP_REPROMPT: 'What would you like to do?',
+
+    // Errors
+    ERROR: 'Sorry, there was a problem processing your request. Please try again.',
+    ERROR_SHEETS: 'Sorry, I couldn\'t save the information right now. Please try again later.',
+    FALLBACK: 'Sorry, I didn\'t understand that. You can say: register breastfeeding, log bottle with breast milk, or give me today\'s summary.',
+
+    // Goodbye
+    GOODBYE: 'Goodbye! Take good care of baby.',
+
+    // Yes/No
+    YES: 'yes',
+    NO: 'no'
+  }
+};

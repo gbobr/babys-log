@@ -1,0 +1,227 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "bitácora del bebé",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "ayuda",
+            "ayúdame",
+            "qué puedo hacer",
+            "qué puedes hacer"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "RegistrarTomaDePechoIntent",
+          "slots": [],
+          "samples": [
+            "registra toma de pecho",
+            "anota toma de pecho",
+            "el bebé tomó pecho",
+            "el bebé mamó",
+            "lactó",
+            "lactancia",
+            "pecho",
+            "amamantó",
+            "registra lactancia",
+            "anota lactancia",
+            "el bebé está lactando",
+            "el bebé está mamando"
+          ]
+        },
+        {
+          "name": "RegistrarBiberonLecheIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "registra biberón con leche materna",
+            "anota biberón con leche materna",
+            "el bebé tomó biberón con leche materna",
+            "el bebé tomó leche materna",
+            "biberón con leche materna",
+            "biberón de leche materna",
+            "registra biberón con leche",
+            "anota biberón con leche",
+            "biberón con leche materna de {cantidad} mililitros",
+            "biberón con leche materna {cantidad} mililitros",
+            "anota biberón con leche materna {cantidad} mililitros",
+            "anota biberón con leche materna {cantidad} ml",
+            "registra biberón con leche materna {cantidad} mililitros",
+            "registra biberón con leche materna {cantidad} ml",
+            "el bebé tomó {cantidad} mililitros de leche materna",
+            "el bebé tomó leche materna {cantidad} mililitros",
+            "registra biberón de {cantidad} mililitros con leche materna",
+            "anota {cantidad} ml de leche materna",
+            "biberón de {cantidad} mililitros de leche materna",
+            "biberón de {cantidad} ml de leche materna",
+            "registra {cantidad} mililitros de leche materna",
+            "anota {cantidad} mililitros de leche materna",
+            "registra {cantidad} ml de leche materna",
+            "anota {cantidad} ml de leche materna",
+            "{cantidad} mililitros de leche materna",
+            "{cantidad} ml de leche materna",
+            "registra {cantidad} de leche materna",
+            "anota {cantidad} de leche materna",
+            "leche materna"
+          ]
+        },
+        {
+          "name": "RegistrarBiberonFormulaIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "registra biberón con fórmula",
+            "anota biberón con fórmula",
+            "el bebé tomó biberón con fórmula",
+            "el bebé tomó fórmula",
+            "biberón con fórmula",
+            "biberón de fórmula",
+            "registra fórmula",
+            "anota fórmula",
+            "biberón con fórmula de {cantidad} mililitros",
+            "biberón con fórmula {cantidad} mililitros",
+            "anota biberón con fórmula {cantidad} mililitros",
+            "anota biberón con fórmula {cantidad} ml",
+            "registra biberón con fórmula {cantidad} mililitros",
+            "registra biberón con fórmula {cantidad} ml",
+            "el bebé tomó {cantidad} mililitros de fórmula",
+            "el bebé tomó fórmula {cantidad} mililitros",
+            "registra biberón de {cantidad} mililitros con fórmula",
+            "anota {cantidad} ml de fórmula",
+            "biberón de {cantidad} mililitros de fórmula",
+            "biberón de {cantidad} ml de fórmula",
+            "registra {cantidad} mililitros de fórmula",
+            "anota {cantidad} mililitros de fórmula",
+            "registra {cantidad} ml de fórmula",
+            "anota {cantidad} ml de fórmula",
+            "{cantidad} mililitros de fórmula",
+            "{cantidad} ml de fórmula",
+            "registra {cantidad} de fórmula",
+            "anota {cantidad} de fórmula",
+            "fórmula"
+          ]
+        },
+        {
+          "name": "RegistrarRegurgitacionIntent",
+          "slots": [],
+          "samples": [
+            "registra regurgitación",
+            "anota regurgitación",
+            "el bebé regurgitó",
+            "el bebé vomitó",
+            "registra vómito",
+            "anota vómito",
+            "regurgitó",
+            "vomitó",
+            "el bebé devolvió",
+            "registra que devolvió",
+            "el bebé escupió",
+            "registra que escupió"
+          ]
+        },
+        {
+          "name": "ActualizarUltimaEntradaIntent",
+          "slots": [
+            {
+              "name": "cantidad",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "duracion",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "actualiza la última entrada con {cantidad} mililitros",
+            "actualiza la última toma con {cantidad} mililitros",
+            "actualiza con {cantidad} mililitros",
+            "modifica la última entrada con {cantidad} mililitros",
+            "cambia la última entrada a {cantidad} mililitros",
+            "agrega {cantidad} mililitros a la última entrada",
+            "la última fue de {cantidad} mililitros",
+            "fueron {cantidad} mililitros",
+            "actualiza {cantidad} mililitros",
+            "modifica {cantidad} mililitros",
+            "cambia a {cantidad} mililitros",
+            "en realidad fueron {cantidad} mililitros",
+            "corrige a {cantidad} mililitros",
+            "actualiza la última entrada con {cantidad} ml",
+            "actualiza con {cantidad} ml",
+            "fueron {cantidad} ml",
+            "actualiza la última entrada con {duracion} minutos",
+            "actualiza la última toma con {duracion} minutos",
+            "actualiza con {duracion} minutos",
+            "modifica la última entrada con {duracion} minutos",
+            "cambia la última entrada a {duracion} minutos",
+            "la última fue de {duracion} minutos",
+            "fueron {duracion} minutos",
+            "actualiza {duracion} minutos",
+            "duró {duracion} minutos",
+            "en realidad fueron {duracion} minutos",
+            "corrige a {duracion} minutos"
+          ]
+        },
+        {
+          "name": "ConsultarUltimaTomIntent",
+          "slots": [],
+          "samples": [
+            "cuál fue la última toma",
+            "última toma",
+            "cuándo fue la última toma",
+            "cuándo comió el bebé",
+            "cuándo tomó el bebé",
+            "última vez que comió",
+            "última vez que tomó leche",
+            "qué fue lo último que comió el bebé"
+          ]
+        },
+        {
+          "name": "ConsultarResumenDiaIntent",
+          "slots": [],
+          "samples": [
+            "dame el resumen del día",
+            "resumen del día",
+            "resumen de hoy",
+            "cuántas tomas hoy",
+            "cuántas veces comió hoy",
+            "cuántas veces tomó leche hoy",
+            "cuánto ha comido hoy",
+            "qué ha comido hoy el bebé",
+            "resumen",
+            "estadísticas de hoy"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
