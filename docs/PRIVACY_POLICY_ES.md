@@ -1,6 +1,6 @@
 # Política de Privacidad de Bitácora del Bebé / Baby's Log
 
-**Última actualización:** 17 de noviembre de 2024
+**Última actualización:** 17 de noviembre de 2025
 
 ## Introducción
 
@@ -78,7 +78,7 @@ Estos servicios se utilizan únicamente para proporcionar la funcionalidad de la
 2. **Revoca el acceso de Google** en https://myaccount.google.com/permissions
 3. **Elimina tu hoja de cálculo** en Google Drive (si deseas eliminar los registros de alimentación)
 
-Después de deshabilitar, tus datos se eliminarán de nuestra base de datos en un plazo de 90 días. Para solicitar la eliminación inmediata, contáctanos en [TU-EMAIL@ejemplo.com].
+Después de deshabilitar, tus datos se eliminarán de nuestra base de datos en un plazo de 90 días. Para solicitar la eliminación inmediata, contáctanos en german@germanbobr.com.ar
 
 ## Privacidad de Menores
 
@@ -136,14 +136,14 @@ Dependiendo de tu ubicación, puedes tener derechos que incluyen:
 - **Portabilidad**: Solicitar tus datos en un formato portable
 - **Objeción**: Objetar ciertas actividades de procesamiento de datos
 
-Para ejercer estos derechos, contáctanos en [TU-EMAIL@ejemplo.com].
+Para ejercer estos derechos, contáctanos en german@germanbobr.com.ar
 
 ## Contáctanos
 
 Si tienes preguntas sobre esta Política de Privacidad o nuestras prácticas de datos, contáctanos en:
 
-**Email:** [TU-EMAIL@ejemplo.com]
-**Repositorio del Proyecto:** [TU-URL-GITHUB-REPO]
+**Email:** german@germanbobr.com.ar
+**Repositorio del Proyecto:** https://github.com/gbobr/babys-log
 
 ## Cumplimiento
 

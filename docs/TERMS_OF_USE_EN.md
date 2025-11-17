@@ -1,6 +1,6 @@
 # Terms of Use for Bitácora del Bebé / Baby's Log
 
-**Last Updated:** November 17, 2024
+**Last Updated:** November 17, 2025
 
 ## 1. Acceptance of Terms
 
@@ -188,10 +188,10 @@ This Service is provided from facilities in various locations. We make no repres
 ## 17. Governing Law and Disputes
 
 ### 17.1 Governing Law
-These Terms shall be governed by the laws of [YOUR-JURISDICTION], without regard to conflict of law principles.
+These Terms shall be governed by the laws of Argentina, without regard to conflict of law principles.
 
 ### 17.2 Dispute Resolution
-Any disputes arising from these Terms or your use of the Service should first be addressed by contacting us at [YOUR-EMAIL@example.com]. If we cannot resolve the dispute informally, you agree to submit to the jurisdiction of the courts in [YOUR-JURISDICTION].
+Any disputes arising from these Terms or your use of the Service should first be addressed by contacting us at german@germanbobr.com.ar. If we cannot resolve the dispute informally, you agree to submit to the jurisdiction of the courts in Argentina.
 
 ## 18. Severability
 
@@ -213,8 +213,8 @@ Our failure to enforce any right or provision of these Terms will not be conside
 
 For questions about these Terms, contact us at:
 
-**Email:** [YOUR-EMAIL@example.com]
-**Project Repository:** [YOUR-GITHUB-REPO-URL]
+**Email:** german@germanbobr.com.ar
+**Project Repository:** https://github.com/gbobr/babys-log
 
 ## 23. Acknowledgment
 

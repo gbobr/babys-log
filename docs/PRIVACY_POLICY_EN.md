@@ -1,6 +1,6 @@
 # Privacy Policy for Bitácora del Bebé / Baby's Log
 
-**Last Updated:** November 17, 2024
+**Last Updated:** November 17, 2025
 
 ## Introduction
 
@@ -78,7 +78,7 @@ These services are used solely to provide the skill's functionality.
 2. **Revoke Google access** at https://myaccount.google.com/permissions
 3. **Delete your spreadsheet** in Google Drive (if you wish to delete feeding records)
 
-After disabling, your data will be removed from our database within 90 days. To request immediate deletion, contact us at [YOUR-EMAIL@example.com].
+After disabling, your data will be removed from our database within 90 days. To request immediate deletion, contact us at german@germanbobr.com.ar
 
 ## Children's Privacy
 
@@ -136,14 +136,14 @@ Depending on your location, you may have rights including:
 - **Portability**: Request your data in a portable format
 - **Objection**: Object to certain data processing activities
 
-To exercise these rights, contact us at [YOUR-EMAIL@example.com].
+To exercise these rights, contact us at german@germanbobr.com.ar
 
 ## Contact Us
 
 If you have questions about this Privacy Policy or our data practices, contact us at:
 
-**Email:** [YOUR-EMAIL@example.com]
-**Project Repository:** [YOUR-GITHUB-REPO-URL]
+**Email:** german@germanbobr.com.ar
+**Project Repository:** https://github.com/gbobr/babys-log
 
 ## Compliance
 

@@ -1,6 +1,6 @@
 # Términos de Uso de Bitácora del Bebé / Baby's Log
 
-**Última actualización:** 17 de noviembre de 2024
+**Última actualización:** 17 de noviembre de 2025
 
 ## 1. Aceptación de los Términos
 
@@ -188,10 +188,10 @@ Este Servicio se proporciona desde instalaciones en varias ubicaciones. No repre
 ## 17. Ley Aplicable y Disputas
 
 ### 17.1 Ley Aplicable
-Estos Términos se regirán por las leyes de [TU-JURISDICCIÓN], sin tener en cuenta los principios de conflicto de leyes.
+Estos Términos se regirán por las leyes de Argentina, sin tener en cuenta los principios de conflicto de leyes.
 
 ### 17.2 Resolución de Disputas
-Cualquier disputa que surja de estos Términos o de tu uso del Servicio debe abordarse primero contactándonos en [TU-EMAIL@ejemplo.com]. Si no podemos resolver la disputa de manera informal, aceptas someterte a la jurisdicción de los tribunales en [TU-JURISDICCIÓN].
+Cualquier disputa que surja de estos Términos o de tu uso del Servicio debe abordarse primero contactándonos en german@germanbobr.com.ar. Si no podemos resolver la disputa de manera informal, aceptas someterte a la jurisdicción de los tribunales en Argentina.
 
 ## 18. Divisibilidad
 
@@ -213,8 +213,8 @@ Nuestra falta de aplicación de cualquier derecho o disposición de estos Térmi
 
 Para preguntas sobre estos Términos, contáctanos en:
 
-**Email:** [TU-EMAIL@ejemplo.com]
-**Repositorio del Proyecto:** [TU-URL-GITHUB-REPO]
+**Email:** german@germanbobr.com.ar
+**Repositorio del Proyecto:** https://github.com/gbobr/babys-log
 
 ## 23. Reconocimiento
 
