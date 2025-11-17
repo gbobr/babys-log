@@ -38,13 +38,17 @@
           "samples": [
             "register breastfeeding",
             "log breastfeeding",
+            "record breastfeeding",
             "baby breastfed",
             "baby nursed",
             "breastfeeding",
             "nursing",
-            "record breastfeeding",
             "baby is breastfeeding",
-            "baby is nursing"
+            "baby is nursing",
+            "to register breastfeeding",
+            "to log breastfeeding",
+            "to record breastfeeding",
+            "to record nursing"
           ]
         },
         {
@@ -58,6 +62,7 @@
           "samples": [
             "register bottle with breast milk",
             "log bottle with breast milk",
+            "record bottle with breast milk",
             "baby had a bottle with breast milk",
             "baby had breast milk",
             "bottle with breast milk",
@@ -70,20 +75,32 @@
             "log bottle with breast milk {cantidad} ml",
             "register bottle with breast milk {cantidad} milliliters",
             "register bottle with breast milk {cantidad} ml",
+            "record bottle with breast milk {cantidad} milliliters",
+            "record bottle with breast milk {cantidad} ml",
             "baby had {cantidad} milliliters of breast milk",
             "baby had breast milk {cantidad} milliliters",
             "register bottle of {cantidad} milliliters with breast milk",
+            "record bottle of {cantidad} milliliters with breast milk",
             "log {cantidad} ml of breast milk",
             "bottle of {cantidad} milliliters of breast milk",
             "bottle of {cantidad} ml of breast milk",
             "register {cantidad} milliliters of breast milk",
             "log {cantidad} milliliters of breast milk",
+            "record {cantidad} milliliters of breast milk",
             "register {cantidad} ml of breast milk",
             "log {cantidad} ml of breast milk",
+            "record {cantidad} ml of breast milk",
             "{cantidad} milliliters of breast milk",
             "{cantidad} ml of breast milk",
             "register {cantidad} of breast milk",
             "log {cantidad} of breast milk",
+            "record {cantidad} of breast milk",
+            "to register {cantidad} milliliters of breast milk",
+            "to log {cantidad} milliliters of breast milk",
+            "to record {cantidad} milliliters of breast milk",
+            "to register {cantidad} ml of breast milk",
+            "to log {cantidad} ml of breast milk",
+            "to record {cantidad} ml of breast milk",
             "breast milk"
           ]
         },
@@ -98,32 +115,46 @@
           "samples": [
             "register bottle with formula",
             "log bottle with formula",
+            "record bottle with formula",
             "baby had a bottle with formula",
             "baby had formula",
             "bottle with formula",
             "bottle of formula",
             "register formula",
             "log formula",
+            "record formula",
             "bottle with formula of {cantidad} milliliters",
             "bottle with formula {cantidad} milliliters",
             "log bottle with formula {cantidad} milliliters",
             "log bottle with formula {cantidad} ml",
             "register bottle with formula {cantidad} milliliters",
             "register bottle with formula {cantidad} ml",
+            "record bottle with formula {cantidad} milliliters",
+            "record bottle with formula {cantidad} ml",
             "baby had {cantidad} milliliters of formula",
             "baby had formula {cantidad} milliliters",
             "register bottle of {cantidad} milliliters with formula",
+            "record bottle of {cantidad} milliliters with formula",
             "log {cantidad} ml of formula",
             "bottle of {cantidad} milliliters of formula",
             "bottle of {cantidad} ml of formula",
             "register {cantidad} milliliters of formula",
             "log {cantidad} milliliters of formula",
+            "record {cantidad} milliliters of formula",
             "register {cantidad} ml of formula",
             "log {cantidad} ml of formula",
+            "record {cantidad} ml of formula",
             "{cantidad} milliliters of formula",
             "{cantidad} ml of formula",
             "register {cantidad} of formula",
             "log {cantidad} of formula",
+            "record {cantidad} of formula",
+            "to register {cantidad} milliliters of formula",
+            "to log {cantidad} milliliters of formula",
+            "to record {cantidad} milliliters of formula",
+            "to register {cantidad} ml of formula",
+            "to log {cantidad} ml of formula",
+            "to record {cantidad} ml of formula",
             "formula"
           ]
         },
@@ -133,16 +164,24 @@
           "samples": [
             "register regurgitation",
             "log regurgitation",
+            "record regurgitation",
             "baby spit up",
             "baby regurgitated",
             "baby vomited",
             "register spit up",
             "log spit up",
+            "record spit up",
             "spit up",
             "regurgitated",
             "vomited",
             "baby threw up",
-            "register throw up"
+            "register throw up",
+            "record throw up",
+            "to register regurgitation",
+            "to log regurgitation",
+            "to record regurgitation",
+            "to register spit up",
+            "to record spit up"
           ]
         },
         {
@@ -174,6 +213,11 @@
             "update the last entry with {cantidad} ml",
             "update with {cantidad} ml",
             "it was {cantidad} ml",
+            "to update the last entry with {cantidad} milliliters",
+            "to update with {cantidad} milliliters",
+            "to modify the last entry with {cantidad} milliliters",
+            "to update the last entry with {cantidad} ml",
+            "to update with {cantidad} ml",
             "update the last entry with {duracion} minutes",
             "update the last feeding with {duracion} minutes",
             "update with {duracion} minutes",
@@ -184,7 +228,10 @@
             "update {duracion} minutes",
             "it lasted {duracion} minutes",
             "actually it was {duracion} minutes",
-            "correct to {duracion} minutes"
+            "correct to {duracion} minutes",
+            "to update the last entry with {duracion} minutes",
+            "to update with {duracion} minutes",
+            "to modify the last entry with {duracion} minutes"
           ]
         },
         {
@@ -198,7 +245,12 @@
             "when did baby feed",
             "last time baby ate",
             "last time baby had milk",
-            "what was the last thing baby ate"
+            "what was the last thing baby ate",
+            "to check the last feeding",
+            "to get the last feeding",
+            "tell me the last feeding",
+            "check the last feeding",
+            "get the last feeding"
           ]
         },
         {
@@ -214,7 +266,13 @@
             "how much has baby eaten today",
             "what has baby eaten today",
             "summary",
-            "today's statistics"
+            "today's statistics",
+            "to give me today's summary",
+            "to get today's summary",
+            "to check today's summary",
+            "get today's summary",
+            "check today's summary",
+            "tell me today's summary"
           ]
         }
       ],
