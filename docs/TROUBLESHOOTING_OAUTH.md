@@ -66,10 +66,9 @@ https://oauth2.googleapis.com/token
 **Authentication Scheme:**
 - Must be: **HTTP Basic (Recommended)**
 
-**Scopes (one per line):**
+**Scope:**
 ```
-https://www.googleapis.com/auth/spreadsheets
-https://www.googleapis.com/auth/userinfo.email
+https://www.googleapis.com/auth/drive.file
 ```
 
 **After making changes:**
@@ -104,13 +103,11 @@ In Google Cloud Console:
 
 3. Click **Edit App**
 4. Go to **Scopes** step
-5. Verify both scopes are added:
-   - `https://www.googleapis.com/auth/spreadsheets`
-   - `https://www.googleapis.com/auth/userinfo.email`
-6. If missing, add them:
+5. Verify the scope is added:
+   - `https://www.googleapis.com/auth/drive.file`
+6. If missing, add it:
    - Click **ADD OR REMOVE SCOPES**
-   - Search for "spreadsheets" and check it
-   - Search for "userinfo.email" and check it
+   - Search for "drive.file" and check it
    - Click **UPDATE**
    - Click **SAVE AND CONTINUE**
 
@@ -144,8 +141,7 @@ Let's verify Google is working correctly:
 5. Paste your **OAuth Client secret**
 6. Click **Close**
 7. In Step 1, scroll and select:
-   - `https://www.googleapis.com/auth/spreadsheets`
-   - `https://www.googleapis.com/auth/userinfo.email`
+   - `https://www.googleapis.com/auth/drive.file`
 8. Click **Authorize APIs**
 9. Sign in with Google
 10. Grant permissions
@@ -284,7 +280,7 @@ The logs will show if Alexa is even trying to invoke your skill. If you don't se
 | Redirect URIs (3 URLs) | Redirect URLs (provided by Alexa) |
 | Client ID | Your Client ID |
 | Client Secret | Your Secret |
-| Scopes: spreadsheets + email | Scopes (2 lines) |
+| Scope: drive.file | Scope (1 line) |
 
 ---
 

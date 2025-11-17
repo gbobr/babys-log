@@ -108,8 +108,7 @@ Cuando vinculas tu cuenta de Google:
 5. Puedes revocar el acceso en cualquier momento a través de la configuración de tu cuenta de Google
 
 **Permisos Solicitados:**
-- `https://www.googleapis.com/auth/spreadsheets` - Para crear y gestionar tu hoja de cálculo de alimentación
-- `https://www.googleapis.com/auth/drive.metadata.readonly` - Para verificar que tu hoja de cálculo existe y no ha sido eliminada
+- `https://www.googleapis.com/auth/drive.file` - Para crear y gestionar tu hoja de cálculo de alimentación (limitado solo a archivos creados por esta aplicación)
 
 ## Transferencias Internacionales de Datos
 

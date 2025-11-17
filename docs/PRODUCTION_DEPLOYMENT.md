@@ -133,9 +133,8 @@ Before deploying to production:
   - CloudWatch Logs: CreateLogGroup, CreateLogStream, PutLogEvents
 - [ ] Enable Lambda function encryption
 - [ ] Review CloudWatch log retention settings
-- [ ] Verify Google OAuth scopes are minimal:
-  - `https://www.googleapis.com/auth/spreadsheets`
-  - `https://www.googleapis.com/auth/drive.metadata.readonly`
+- [ ] Verify Google OAuth scope uses least privilege:
+  - `https://www.googleapis.com/auth/drive.file` (only accesses files created by the app)
 - [ ] Test account linking flow end-to-end
 - [ ] Verify legal documents are publicly accessible
 - [ ] Review Alexa skill privacy settings

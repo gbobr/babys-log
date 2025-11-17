@@ -48,8 +48,7 @@ User → Alexa (OAuth) → Lambda → Google Sheets API
 5. Add scopes:
    - Click **Add or Remove Scopes**
    - Search and add:
-     - `https://www.googleapis.com/auth/spreadsheets`
-     - `https://www.googleapis.com/auth/userinfo.email`
+     - `https://www.googleapis.com/auth/drive.file`
    - Click **Update** and **Save and Continue**
 
 6. Add test users (during development):
@@ -160,10 +159,8 @@ https://oauth2.googleapis.com/token
 - Select **HTTP Basic (Recommended)**
 
 **Scope**:
-Add two scopes (click **+ Add scope** for each):
 ```
-https://www.googleapis.com/auth/spreadsheets
-https://www.googleapis.com/auth/userinfo.email
+https://www.googleapis.com/auth/drive.file
 ```
 
 **Domain List** (optional):
@@ -244,14 +241,14 @@ Then upload `function.zip` to your Lambda function.
 ### "Account linking required" message keeps appearing
 
 - Check that redirect URLs in Google Console match exactly those from Alexa
-- Verify OAuth scopes are correctly configured
+- Verify OAuth scope is correctly configured (`drive.file`)
 - Try unlinking and relinking the account in Alexa app
 
 ### "Error creating spreadsheet" message
 
 - Check Lambda CloudWatch logs for detailed error
-- Verify Google Sheets API is enabled
-- Ensure OAuth token has `spreadsheets` scope
+- Verify Google Sheets API and Google Drive API are enabled
+- Ensure OAuth token has `drive.file` scope
 - Check that user granted permissions during linking
 
 ### DynamoDB errors

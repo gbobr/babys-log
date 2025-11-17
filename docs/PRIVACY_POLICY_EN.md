@@ -108,8 +108,7 @@ When you link your Google account:
 5. You can revoke access at any time through your Google account settings
 
 **Permissions Requested:**
-- `https://www.googleapis.com/auth/spreadsheets` - To create and manage your feeding spreadsheet
-- `https://www.googleapis.com/auth/drive.metadata.readonly` - To verify your spreadsheet exists and is not deleted
+- `https://www.googleapis.com/auth/drive.file` - To create and manage your feeding spreadsheet (limited to files created by this app only)
 
 ## International Data Transfers
 

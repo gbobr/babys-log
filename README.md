@@ -256,9 +256,8 @@ The codebase is modular and easy to extend:
 
 1. Verify OAuth redirect URLs match exactly between Google Console and Alexa
 2. Check Google OAuth consent screen is published (not in testing)
-3. Ensure both required scopes are added:
-   - `https://www.googleapis.com/auth/spreadsheets`
-   - `https://www.googleapis.com/auth/drive.metadata.readonly`
+3. Ensure the required scope is added:
+   - `https://www.googleapis.com/auth/drive.file`
 4. Clear browser cache and try again in incognito mode
 
 ### "Error creating spreadsheet"
