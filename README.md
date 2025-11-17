@@ -6,6 +6,7 @@ An Alexa skill to track your baby's feeding information using Google Sheets. Eac
 
 - **Multiple Feeding Types**: Breastfeeding, bottle with breast milk, bottle with formula
 - **Regurgitation Tracking**: Log regurgitation events
+- **Automatic Reminders**: Optional 3-hour feeding reminders via Alexa Reminders API
 - **Update Entries**: Modify the most recent feeding with amount or duration
 - **Query History**:
   - Check last feeding (`cuál fue la última toma`)
@@ -40,6 +41,7 @@ lola/
 │   │   │   ├── accountLinking.js   # OAuth and user management
 │   │   │   ├── dynamodb.js         # DynamoDB operations
 │   │   │   ├── logger.js           # Production logging utility
+│   │   │   ├── reminders.js        # Alexa Reminders API integration
 │   │   │   ├── sheets.js           # Google Sheets API integration
 │   │   │   ├── strings.js          # Localized strings (es-ES, en-US)
 │   │   │   └── timezone.js         # Timezone utilities
@@ -346,11 +348,13 @@ Contributions welcome! Areas for improvement:
 
 ## Roadmap
 
-- [ ] Multi-baby support
-- [ ] Sleep tracking
-- [ ] Diaper tracking
-- [ ] Growth tracking (weight, height)
-- [ ] Weekly email summaries
-- [ ] Data export (CSV, PDF)
-- [ ] Alexa notifications/reminders
-- [ ] Integration with pediatrician systems
+- [x] **Alexa feeding reminders** - Automatic 3-hour notifications ✅
+- [ ] **Sleep tracking** - Log sleep sessions with duration
+- [ ] **Diaper tracking** - Track wet and dirty diapers
+- [ ] **Multi-baby support** - Track multiple children in one account
+- [ ] **Growth tracking** - Record weight, height, head circumference
+- [ ] **Weekly/monthly summaries** - Voice reports with statistics
+- [ ] **Medication tracking** - Log medicine doses and schedules
+- [ ] **Temperature tracking** - Record fever and health metrics
+- [ ] **Notes/observations** - Add freeform text notes to entries
+- [ ] **Photo logging** - Link photos to feeding/sleep entries (via app card)

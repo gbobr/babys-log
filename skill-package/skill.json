@@ -74,7 +74,11 @@
       }
     },
     "manifestVersion": "1.0",
-    "permissions": [],
+    "permissions": [
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
     "privacyAndCompliance": {
       "allowsPurchases": false,
       "usesPersonalInfo": false,

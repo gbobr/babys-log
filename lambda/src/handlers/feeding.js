@@ -6,6 +6,8 @@
 const { appendFeeding, getLastFeeding, updateLastFeeding } = require('../utils/sheets');
 const { getDeviceTimezone, formatTimeInTimezone } = require('../utils/timezone');
 const { getUserContext } = require('../utils/accountLinking');
+const { scheduleNextFeedingReminder, shouldAskForPermission, markPermissionAsked, hasReminderPermission } = require('../utils/reminders');
+const { getUserData } = require('../utils/dynamodb');
 const logger = require('../utils/logger');
 
 // ===== BREASTFEEDING =====
@@ -315,11 +317,49 @@ const YesIntentHandler = {
       const timezone = await getDeviceTimezone(handlerInput);
       const time = formatTimeInTimezone(new Date(), timezone);
       const amountText = amount ? t('AMOUNT_ML', { amount }) : '';
-      const speechText = t(responseKey, { time, amount: amountText });
+      const feedingTime = new Date().toISOString();
 
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .getResponse();
+      // ===== REMINDER LOGIC =====
+      // Check if we should ask for reminder permission (first feeding for new/existing users)
+      const userId = userContext.userId;
+      const userData = await getUserData(userId);
+
+      let speechText = t(responseKey, { time, amount: amountText });
+      let shouldAskPermission = false;
+
+      // Only ask for permission if:
+      // 1. We haven't asked before (new users or existing users after feature deployment)
+      // 2. User doesn't have permission yet (if they have it, we'll just schedule)
+      if (shouldAskForPermission(userData) && !hasReminderPermission(handlerInput)) {
+        // Ask for permission after confirming feeding was recorded
+        speechText = t('REMINDER_PERMISSION_REQUEST');
+        shouldAskPermission = true;
+
+        // Mark that we asked, so we don't ask again
+        await markPermissionAsked(userId);
+
+        // Store that we're waiting for permission response
+        sessionAttributes.awaitingReminderPermission = true;
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+      } else {
+        // User either already has permission or already declined
+        // Try to schedule reminder (will silently fail if no permission)
+        await scheduleNextFeedingReminder(handlerInput, userId, feedingTime);
+      }
+
+      const responseBuilder = handlerInput.responseBuilder.speak(speechText);
+
+      // If asking for permission, add the permission card and keep session open
+      if (shouldAskPermission) {
+        responseBuilder
+          .withAskForPermissionsConsentCard(['alexa::alerts:reminders:skill:readwrite'])
+          .reprompt(t('HELP_REPROMPT'))
+          .withShouldEndSession(false);
+      } else {
+        responseBuilder.withShouldEndSession(true);
+      }
+
+      return responseBuilder.getResponse();
 
     } catch (error) {
       logger.error('Error saving feeding:', error);

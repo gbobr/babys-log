@@ -74,6 +74,10 @@ module.exports = {
     // Goodbye
     GOODBYE: '¡Hasta luego! Cuida bien al bebé.',
 
+    // Reminders
+    REMINDER_PERMISSION_REQUEST: 'Toma registrada! ¿Te gustaría que te recuerde cada 3 horas cuando es hora de alimentar al bebé?',
+    REMINDER_PERMISSION_CARD: 'Para recibir recordatorios de alimentación, necesito tu permiso. Por favor habilita los permisos de recordatorios en la aplicación Alexa.',
+
     // Yes/No
     YES: 'sí',
     NO: 'no'
@@ -147,6 +151,10 @@ module.exports = {
 
     // Goodbye
     GOODBYE: 'Goodbye! Take good care of baby.',
+
+    // Reminders
+    REMINDER_PERMISSION_REQUEST: 'Feeding registered! Would you like me to remind you every 3 hours when it\'s time to feed the baby?',
+    REMINDER_PERMISSION_CARD: 'To receive feeding reminders, I need your permission. Please enable reminder permissions in the Alexa app.',
 
     // Yes/No
     YES: 'yes',
