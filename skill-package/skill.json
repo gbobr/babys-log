@@ -21,22 +21,22 @@
           "description": "Bitácora del Bebé te ayuda a llevar un registro de todas las tomas de tu bebé. Puedes registrar tomas de pecho, biberones con leche materna, y biberones con fórmula. También puedes consultar la última toma y obtener un resumen del día.\n\nCaracterísticas:\n- Registra tomas de pecho\n- Registra biberones con leche materna (con cantidad opcional)\n- Registra biberones con fórmula (con cantidad opcional)\n- Consulta la última toma\n- Obtén un resumen diario de todas las tomas\n\nLos datos se guardan en Google Sheets para que puedas acceder a ellos desde cualquier dispositivo."
         },
         "en-US": {
-          "summary": "Track your baby's milk intake",
+          "summary": "Track your baby's feedings and care",
           "examplePhrases": [
-            "Alexa, open milk tracker",
-            "Alexa, ask milk tracker to register breastfeeding",
-            "Alexa, ask milk tracker for today's summary"
+            "Alexa, open baby's log",
+            "Alexa, ask baby's log to register breastfeeding",
+            "Alexa, ask baby's log for today's summary"
           ],
           "keywords": [
             "baby",
             "breastfeeding",
             "feeding",
-            "milk",
-            "tracker",
+            "log",
+            "logbook",
             "tracking"
           ],
-          "name": "Baby Milk Tracker",
-          "description": "Baby Milk Tracker helps you keep track of all your baby's feedings. You can register breastfeeding, bottles with breast milk, and bottles with formula. You can also check the last feeding and get a daily summary.\n\nFeatures:\n- Register breastfeeding sessions\n- Register bottles with breast milk (with optional amount)\n- Register bottles with formula (with optional amount)\n- Check the last feeding\n- Get a daily summary of all feedings\n\nData is saved to Google Sheets so you can access it from any device."
+          "name": "Baby's Log",
+          "description": "Baby's Log helps you keep track of all your baby's feedings. You can register breastfeeding, bottles with breast milk, and bottles with formula. You can also check the last feeding and get a daily summary.\n\nFeatures:\n- Register breastfeeding sessions\n- Register bottles with breast milk (with optional amount)\n- Register bottles with formula (with optional amount)\n- Register regurgitation events\n- Update the last entry\n- Check the last feeding\n- Get a daily summary of all feedings\n\nEach user gets their own private Google Sheets spreadsheet via account linking. All data is stored securely in your Google Drive."
         }
       },
       "isAvailableWorldwide": false,

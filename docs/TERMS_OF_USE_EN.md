@@ -1,4 +1,4 @@
-# Terms of Use for Bitácora del Bebé (Baby Tracker)
+# Terms of Use for Bitácora del Bebé / Baby's Log
 
 **Last Updated:** November 17, 2024
 

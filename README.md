@@ -1,4 +1,4 @@
-# Bitácora del Bebé - Baby Tracker Alexa Skill
+# Bitácora del Bebé / Baby's Log - Alexa Skill
 
 An Alexa skill to track your baby's feeding information using Google Sheets. Each user gets their own private spreadsheet via Google OAuth account linking.
 
@@ -193,7 +193,7 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 - "Actualiza la última entrada con 100 mililitros" → "sí"
 
 **English**:
-- "Alexa, open Baby Tracker"
+- "Alexa, open Baby's Log"
 - "Register breastfeeding" → "yes"
 - "Register bottle of breast milk 120 milliliters" → "yes"
 - "What was the last feeding?"

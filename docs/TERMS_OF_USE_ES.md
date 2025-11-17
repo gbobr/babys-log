@@ -1,4 +1,4 @@
-# Términos de Uso de Bitácora del Bebé (Baby Tracker)
+# Términos de Uso de Bitácora del Bebé / Baby's Log
 
 **Última actualización:** 17 de noviembre de 2024
 

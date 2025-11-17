@@ -108,7 +108,7 @@ aws lambda update-function-configuration \
 2. Test via Alexa Developer Console:
    - Go to Test tab
    - Enable testing for "Development"
-   - Try: "Alexa, open Baby Tracker"
+   - Try: "Alexa, open Baby's Log" (EN) or "Alexa, abre Bitácora del Bebé" (ES)
 
 3. Check CloudWatch Logs:
    ```bash

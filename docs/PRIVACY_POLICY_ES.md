@@ -1,4 +1,4 @@
-# Política de Privacidad de Bitácora del Bebé (Baby Tracker)
+# Política de Privacidad de Bitácora del Bebé / Baby's Log
 
 **Última actualización:** 17 de noviembre de 2024
 

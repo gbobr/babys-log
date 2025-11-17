@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "milk tracker",
+      "invocationName": "baby's log",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

@@ -1,4 +1,4 @@
-# Privacy Policy for Bitácora del Bebé (Baby Tracker)
+# Privacy Policy for Bitácora del Bebé / Baby's Log
 
 **Last Updated:** November 17, 2024
 
