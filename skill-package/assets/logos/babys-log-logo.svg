@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="#FFE5F0" stroke="#FF6B9D" stroke-width="8"/>
+  
+  <!-- Baby bottle body -->
+  <rect x="200" y="180" width="112" height="180" rx="15" fill="#FFFFFF" stroke="#4A90E2" stroke-width="6"/>
+  
+  <!-- Bottle cap -->
+  <rect x="220" y="140" width="72" height="40" rx="8" fill="#FF6B9D"/>
+  
+  <!-- Bottle nipple -->
+  <path d="M 236 140 L 236 115 Q 256 105 276 115 L 276 140 Z" fill="#FFB3D9" stroke="#FF6B9D" stroke-width="3"/>
+  
+  <!-- Milk level indicator -->
+  <rect x="210" y="240" width="92" height="100" rx="8" fill="#E8F4FF" opacity="0.8"/>
+  
+  <!-- Measurement lines -->
+  <line x1="315" y1="200" x2="335" y2="200" stroke="#4A90E2" stroke-width="3"/>
+  <line x1="315" y1="240" x2="335" y2="240" stroke="#4A90E2" stroke-width="3"/>
+  <line x1="315" y1="280" x2="335" y2="280" stroke="#4A90E2" stroke-width="3"/>
+  <line x1="315" y1="320" x2="335" y2="320" stroke="#4A90E2" stroke-width="3"/>
+  
+  <!-- Sheet/document icon (representing Google Sheets tracking) -->
+  <rect x="140" y="280" width="50" height="60" rx="4" fill="#34A853" opacity="0.9"/>
+  <line x1="150" y1="295" x2="180" y2="295" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="150" y1="305" x2="180" y2="305" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="150" y1="315" x2="180" y2="315" stroke="#FFFFFF" stroke-width="2"/>
+  <line x1="150" y1="325" x2="170" y2="325" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- Checkmark on sheet -->
+  <path d="M 152 295 L 158 302 L 168 288" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Heart accent (caring/baby theme) -->
+  <path d="M 360 200 Q 360 185 372 185 Q 384 185 384 200 Q 384 210 372 220 Q 360 210 360 200 Z M 372 185 Q 384 185 384 200 Q 384 210 372 220 M 360 200 Q 360 185 372 185" fill="#FF6B9D" opacity="0.7"/>
+  
+  <!-- Clock/time icon (tracking over time) -->
+  <circle cx="370" cy="300" r="25" fill="#FFA726" opacity="0.9" stroke="#F57C00" stroke-width="2"/>
+  <line x1="370" y1="300" x2="370" y2="285" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <line x1="370" y1="300" x2="380" y2="300" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+</svg>
