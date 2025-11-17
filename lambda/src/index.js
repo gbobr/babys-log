@@ -4,6 +4,7 @@
  */
 
 const Alexa = require('ask-sdk-core');
+const logger = require('./utils/logger');
 
 // Import handlers
 const {
@@ -34,36 +35,65 @@ const {
 const LocalizationInterceptor = require('./interceptors/localization');
 
 /**
+ * Request logging interceptor (only active in DEBUG mode)
+ */
+const RequestLoggingInterceptor = {
+  process(handlerInput) {
+    logger.debug('Request received:', {
+      type: handlerInput.requestEnvelope.request.type,
+      intent: handlerInput.requestEnvelope.request.intent?.name,
+      hasAccessToken: !!handlerInput.requestEnvelope.context.System.user.accessToken
+    });
+  }
+};
+
+/**
  * Lambda handler function
  */
-exports.handler = Alexa.SkillBuilders.custom()
-  .addRequestHandlers(
-    // Basic handlers
-    LaunchRequestHandler,
-    HelpIntentHandler,
-    CancelAndStopIntentHandler,
-    FallbackIntentHandler,
-    SessionEndedRequestHandler,
+let skillHandler;
 
-    // Feeding registration handlers
-    RegisterBreastfeedingIntentHandler,
-    RegisterBottleMilkIntentHandler,
-    RegisterBottleFormulaIntentHandler,
-    RegisterRegurgitacionIntentHandler,
-    UpdateLastEntryIntentHandler,
-    YesIntentHandler,
-    NoIntentHandler,
+try {
+  logger.info('Initializing Alexa skill handler');
 
-    // Query handlers
-    LastFeedingIntentHandler,
-    DailySummaryIntentHandler
-  )
-  .addRequestInterceptors(
-    LocalizationInterceptor
-  )
-  .addErrorHandlers(
-    ErrorHandler
-  )
-  .withApiClient(new Alexa.DefaultApiClient())
-  .withCustomUserAgent('baby-milk-tracker/1.0')
-  .lambda();
+  const requestInterceptors = [LocalizationInterceptor];
+
+  // Add request logging only in DEBUG mode
+  if (process.env.LOG_LEVEL === 'DEBUG') {
+    requestInterceptors.unshift(RequestLoggingInterceptor);
+  }
+
+  skillHandler = Alexa.SkillBuilders.custom()
+    .addRequestHandlers(
+      // Basic handlers
+      LaunchRequestHandler,
+      HelpIntentHandler,
+      CancelAndStopIntentHandler,
+      FallbackIntentHandler,
+      SessionEndedRequestHandler,
+
+      // Feeding registration handlers
+      RegisterBreastfeedingIntentHandler,
+      RegisterBottleMilkIntentHandler,
+      RegisterBottleFormulaIntentHandler,
+      RegisterRegurgitacionIntentHandler,
+      UpdateLastEntryIntentHandler,
+      YesIntentHandler,
+      NoIntentHandler,
+
+      // Query handlers
+      LastFeedingIntentHandler,
+      DailySummaryIntentHandler
+    )
+    .addRequestInterceptors(...requestInterceptors)
+    .addErrorHandlers(ErrorHandler)
+    .withApiClient(new Alexa.DefaultApiClient())
+    .withCustomUserAgent('baby-milk-tracker/1.0')
+    .lambda();
+
+  logger.info('Skill handler initialized successfully');
+} catch (error) {
+  logger.error('FATAL ERROR during skill initialization:', error);
+  throw error;
+}
+
+exports.handler = skillHandler;

@@ -5,6 +5,8 @@
 
 const { appendFeeding, getLastFeeding, updateLastFeeding } = require('../utils/sheets');
 const { getDeviceTimezone, formatTimeInTimezone } = require('../utils/timezone');
+const { getUserContext } = require('../utils/accountLinking');
+const logger = require('../utils/logger');
 
 // ===== BREASTFEEDING =====
 
@@ -123,6 +125,12 @@ const UpdateLastEntryIntentHandler = {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
     const { request } = handlerInput.requestEnvelope;
 
+    // Check account linking and get user context
+    const userContext = await getUserContext(handlerInput);
+    if (!userContext.ready) {
+      return userContext.response;
+    }
+
     // Get amount and duration from slots
     const amount = request.intent.slots.cantidad?.value;
     const duration = request.intent.slots.duracion?.value;
@@ -136,7 +144,7 @@ const UpdateLastEntryIntentHandler = {
 
     try {
       // Get the last feeding to check what it is
-      const lastFeeding = await getLastFeeding();
+      const lastFeeding = await getLastFeeding(userContext.spreadsheetId, userContext.accessToken);
 
       if (!lastFeeding) {
         return handlerInput.responseBuilder
@@ -202,7 +210,7 @@ const UpdateLastEntryIntentHandler = {
         .getResponse();
 
     } catch (error) {
-      console.error('Error preparing update:', error);
+      logger.error('Error preparing update:', error);
       return handlerInput.responseBuilder
         .speak(t('ERROR_SHEETS'))
         .withShouldEndSession(true)
@@ -233,6 +241,12 @@ const YesIntentHandler = {
         .getResponse();
     }
 
+    // Check account linking and get user context
+    const userContext = await getUserContext(handlerInput);
+    if (!userContext.ready) {
+      return userContext.response;
+    }
+
     try {
       let type, responseKey;
 
@@ -241,32 +255,32 @@ const YesIntentHandler = {
         case 'BREASTFEEDING':
           type = 'PECHO';
           responseKey = 'BREASTFEEDING_REGISTERED';
-          await appendFeeding(type, null, null);
+          await appendFeeding(userContext.spreadsheetId, userContext.accessToken, type, null, null);
           break;
 
         case 'BOTTLE_MILK':
           type = 'BIBERON_LECHE';
           responseKey = 'BOTTLE_MILK_REGISTERED';
-          await appendFeeding(type, amount, null);
+          await appendFeeding(userContext.spreadsheetId, userContext.accessToken, type, amount, null);
           break;
 
         case 'BOTTLE_FORMULA':
           type = 'BIBERON_FORMULA';
           responseKey = 'BOTTLE_FORMULA_REGISTERED';
-          await appendFeeding(type, amount, null);
+          await appendFeeding(userContext.spreadsheetId, userContext.accessToken, type, amount, null);
           break;
 
         case 'REGURGITATION':
           type = 'REGURGITACION';
           responseKey = 'REGURGITATION_REGISTERED';
-          await appendFeeding(type, null, null);
+          await appendFeeding(userContext.spreadsheetId, userContext.accessToken, type, null, null);
           break;
 
         case 'UPDATE_ENTRY':
           // Update the last entry with amount or duration
           const updateAmount = sessionAttributes.updateAmount;
           const updateDuration = sessionAttributes.updateDuration;
-          await updateLastFeeding(updateAmount, updateDuration);
+          await updateLastFeeding(userContext.spreadsheetId, userContext.accessToken, updateAmount, updateDuration);
 
           // Clear session
           sessionAttributes.pendingIntent = null;
@@ -308,7 +322,7 @@ const YesIntentHandler = {
         .getResponse();
 
     } catch (error) {
-      console.error('Error saving feeding:', error);
+      logger.error('Error saving feeding:', error);
 
       return handlerInput.responseBuilder
         .speak(t('ERROR_SHEETS'))

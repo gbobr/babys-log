@@ -9,6 +9,11 @@ module.exports = {
     WELCOME: '¡Bienvenido a la Bitácora del Bebé! Puedes registrar tomas de pecho, biberones con leche materna o fórmula, y también regurgitaciones. ¿Qué quieres hacer?',
     WELCOME_REPROMPT: '¿Quieres registrar una toma?',
 
+    // Account linking
+    ACCOUNT_LINKING_REQUIRED: 'Para usar esta skill, necesitas vincular tu cuenta de Google. Por favor, revisa la aplicación Alexa para conectar tu cuenta.',
+    FIRST_TIME_SETUP_COMPLETE: '¡Perfecto! He creado tu hoja de cálculo personal en Google Sheets. Ya puedes empezar a registrar las tomas del bebé. ¿Qué quieres hacer?',
+    ERROR_CREATING_SPREADSHEET: 'Lo siento, hubo un problema al crear tu hoja de cálculo. Por favor, verifica que has vinculado tu cuenta correctamente e intenta de nuevo.',
+
     // Breastfeeding
     BREASTFEEDING_CONFIRM: '¿Confirmas que el bebé tomó pecho?',
     BREASTFEEDING_REGISTERED: 'Perfecto. Toma de pecho registrada a las {time}.',
@@ -77,6 +82,11 @@ module.exports = {
   'en-US': {
     WELCOME: 'Welcome to Baby Milk Tracker! You can register breastfeeding, bottles with breast milk or formula, and also regurgitations. What would you like to do?',
     WELCOME_REPROMPT: 'Would you like to register a feeding?',
+
+    // Account linking
+    ACCOUNT_LINKING_REQUIRED: 'To use this skill, you need to link your Google account. Please check the Alexa app to connect your account.',
+    FIRST_TIME_SETUP_COMPLETE: 'Perfect! I\'ve created your personal spreadsheet in Google Sheets. You can now start tracking baby\'s feedings. What would you like to do?',
+    ERROR_CREATING_SPREADSHEET: 'Sorry, there was a problem creating your spreadsheet. Please verify that you have linked your account correctly and try again.',
 
     // Breastfeeding
     BREASTFEEDING_CONFIRM: 'Do you confirm that baby breastfed?',

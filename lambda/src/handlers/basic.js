@@ -3,15 +3,32 @@
  * Includes Launch, Help, Stop, Cancel, and Error handlers
  */
 
+const { getUserContext } = require('../utils/accountLinking');
+const logger = require('../utils/logger');
+
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
 
+    // Check account linking and setup
+    const userContext = await getUserContext(handlerInput);
+    if (!userContext.ready) {
+      return userContext.response;
+    }
+
+    // Check if this is a new user (just created spreadsheet)
+    let welcomeMessage;
+    if (userContext.isNewUser) {
+      welcomeMessage = t('FIRST_TIME_SETUP_COMPLETE');
+    } else {
+      welcomeMessage = t('WELCOME');
+    }
+
     return handlerInput.responseBuilder
-      .speak(t('WELCOME'))
+      .speak(welcomeMessage)
       .reprompt(t('WELCOME_REPROMPT'))
       .getResponse();
   }
@@ -67,7 +84,8 @@ const SessionEndedRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
   },
   handle(handlerInput) {
-    console.log(`Session ended: ${JSON.stringify(handlerInput.requestEnvelope.request)}`);
+    const reason = handlerInput.requestEnvelope.request.reason;
+    logger.info('Session ended:', { reason });
     return handlerInput.responseBuilder.getResponse();
   }
 };
@@ -77,7 +95,7 @@ const ErrorHandler = {
     return true;
   },
   handle(handlerInput, error) {
-    console.error(`Error handled: ${error.stack || error.message}`);
+    logger.error('Error handled:', error);
 
     const { t } = handlerInput.attributesManager.getRequestAttributes();
 

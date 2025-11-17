@@ -1,24 +1,28 @@
-# Baby Milk Tracker - Alexa Skill
+# Bitácora del Bebé - Baby Tracker Alexa Skill
 
-An Alexa skill to track your baby's milk intake, including breastfeeding, bottles with human milk, and bottles with formula. Data is stored in Google Sheets for easy access and analysis.
+An Alexa skill to track your baby's feeding information using Google Sheets. Each user gets their own private spreadsheet via Google OAuth account linking.
 
 ## Features
 
-- **Register Feedings** in Spanish (primary) and English:
-  - Breastfeeding (`registra toma de pecho`)
-  - Bottle with breast milk (`anota biberón con leche materna`)
-  - Bottle with formula (`registra biberón con fórmula`)
-  - Optional amount specification for bottles
-
+- **Multiple Feeding Types**: Breastfeeding, bottle with breast milk, bottle with formula
+- **Regurgitation Tracking**: Log regurgitation events
+- **Update Entries**: Modify the most recent feeding with amount or duration
 - **Query History**:
   - Check last feeding (`cuál fue la última toma`)
   - Get daily summary (`dame el resumen del día`)
-
+- **Timezone Support**: Automatically uses device timezone for accurate timestamps
+- **Multi-User Support**: Each user gets their own Google Sheets spreadsheet via OAuth
+- **Internationalization**: Spanish (es-ES) and English (en-US) support
 - **Confirmation Flow**: All feedings require Yes/No confirmation before recording
 
-- **Internationalization**: Built with i18n support for Spanish (es-ES) and English (en-US)
+## Architecture
 
-- **Google Sheets Integration**: All data stored in Google Sheets for easy access
+- **Platform**: Amazon Alexa
+- **Runtime**: AWS Lambda (Node.js 18.x+)
+- **Storage**:
+  - User metadata: AWS DynamoDB (spreadsheet ID only)
+  - Feeding data: Google Sheets (user-owned, one per user)
+- **Authentication**: Google OAuth 2.0 via Alexa Account Linking
 
 ## Project Structure
 
@@ -33,157 +37,174 @@ lola/
 │   │   ├── interceptors/
 │   │   │   └── localization.js     # i18n request interceptor
 │   │   ├── utils/
+│   │   │   ├── accountLinking.js   # OAuth and user management
+│   │   │   ├── dynamodb.js         # DynamoDB operations
+│   │   │   ├── logger.js           # Production logging utility
 │   │   │   ├── sheets.js           # Google Sheets API integration
-│   │   │   └── strings.js          # Localized strings (es-ES, en-US)
+│   │   │   ├── strings.js          # Localized strings (es-ES, en-US)
+│   │   │   └── timezone.js         # Timezone utilities
 │   │   └── index.js                # Main Lambda handler
-│   └── package.json
+│   ├── package.json
+│   └── function.zip                # Production deployment package
 │
-└── skill-package/                   # Alexa skill configuration
-    ├── interactionModels/
-    │   └── custom/
-    │       ├── es-ES.json          # Spanish interaction model
-    │       └── en-US.json          # English interaction model
-    └── skill.json                  # Skill manifest
+├── skill-package/                   # Alexa skill configuration
+│   ├── interactionModels/
+│   │   └── custom/
+│   │       ├── es-ES.json          # Spanish interaction model
+│   │       └── en-US.json          # English interaction model
+│   └── skill.json                  # Skill manifest
+│
+├── docs/                            # Documentation
+│   ├── ACCOUNT_LINKING_SETUP.md    # OAuth setup guide
+│   ├── PRODUCTION_DEPLOYMENT.md    # Production deployment guide
+│   ├── TROUBLESHOOTING_OAUTH.md    # OAuth troubleshooting
+│   ├── PRIVACY_POLICY_EN.md        # English privacy policy
+│   ├── PRIVACY_POLICY_ES.md        # Spanish privacy policy
+│   ├── TERMS_OF_USE_EN.md          # English terms of use
+│   ├── TERMS_OF_USE_ES.md          # Spanish terms of use
+│   ├── LEGAL_DOCUMENTS_README.md   # Legal docs setup guide
+│   ├── OAUTH_IMPLEMENTATION_SUMMARY.md
+│   ├── QUICKSTART.md
+│   ├── DEPLOYMENT_CHECKLIST.md
+│   ├── TIMEZONE_UPDATE.md
+│   └── CHANGELOG.md
+│
+└── README.md                        # This file
 ```
 
-## Setup Instructions
+## Quick Start
 
-### 1. Google Sheets Setup
+**For detailed setup instructions, see [ACCOUNT_LINKING_SETUP.md](docs/ACCOUNT_LINKING_SETUP.md)**.
 
-1. **Create a Google Spreadsheet**:
-   - Go to [Google Sheets](https://sheets.google.com)
-   - Create a new spreadsheet
-   - Rename it to "Baby Milk Tracker" (or your preferred name)
-   - Create a sheet named "Feedings"
-   - Note the Spreadsheet ID from the URL: `https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit`
+### Overview
 
-2. **Create a Google Service Account**:
-   - Go to [Google Cloud Console](https://console.cloud.google.com)
-   - Create a new project or select an existing one
-   - Enable the Google Sheets API
-   - Go to "IAM & Admin" > "Service Accounts"
-   - Click "Create Service Account"
-   - Give it a name like "baby-milk-tracker"
-   - Click "Create and Continue"
-   - Grant the "Editor" role
-   - Click "Done"
-   - Click on the created service account
-   - Go to "Keys" tab
-   - Click "Add Key" > "Create new key"
-   - Choose JSON format
-   - Download the JSON file
+1. **Google OAuth Setup** - Create OAuth 2.0 credentials for user authentication
+2. **AWS Infrastructure** - Set up Lambda function and DynamoDB table
+3. **Alexa Account Linking** - Configure OAuth in Alexa Developer Console
+4. **Testing** - Link your account and test the skill
 
-3. **Share the Spreadsheet**:
-   - Open your Google Sheet
-   - Click "Share" button
-   - Add the service account email (found in the JSON file as `client_email`)
-   - Give it "Editor" permissions
+### Prerequisites
 
-### 2. AWS Lambda Setup
+- AWS account with Lambda and DynamoDB access
+- Google Cloud project
+- Alexa Developer account
+- Node.js 18.x or higher
 
-1. **Install Dependencies**:
+### Key Setup Steps
+
+1. **Google Cloud Console**:
    ```bash
-   cd lambda
-   npm install
+   # Enable APIs
+   - Google Sheets API
+   - Google Drive API
+
+   # Create OAuth 2.0 Client
+   - Application type: Web application
+   - Add Alexa redirect URLs
+   - Copy Client ID and Client Secret
    ```
 
-2. **Create Lambda Function**:
-   - Go to [AWS Lambda Console](https://console.aws.amazon.com/lambda)
-   - Click "Create function"
-   - Choose "Author from scratch"
-   - Function name: `baby-milk-tracker`
-   - Runtime: Node.js 18.x (or later)
-   - Click "Create function"
-
-3. **Configure Environment Variables**:
-   - In the Lambda function configuration, go to "Configuration" > "Environment variables"
-   - Add the following variables:
-     - `GOOGLE_CREDENTIALS`: Paste the entire contents of the service account JSON file
-     - `SPREADSHEET_ID`: Your Google Sheets spreadsheet ID
-
-4. **Upload Code**:
+2. **AWS Setup**:
    ```bash
+   # Create DynamoDB table
+   aws dynamodb create-table \
+     --table-name BabyTrackerUsers \
+     --attribute-definitions AttributeName=userId,AttributeType=S \
+     --key-schema AttributeName=userId,KeyType=HASH \
+     --billing-mode PAY_PER_REQUEST
+
+   # Deploy Lambda
    cd lambda
-   npm run deploy  # Creates function.zip
+   npm install --production
+   npm run build
+   aws lambda update-function-code \
+     --function-name your-function-name \
+     --zip-file fileb://function.zip
+
+   # Set environment variables
+   aws lambda update-function-configuration \
+     --function-name your-function-name \
+     --environment Variables="{LOG_LEVEL=ERROR,DYNAMODB_TABLE_NAME=BabyTrackerUsers}"
    ```
-   - Upload `function.zip` to Lambda via the console or AWS CLI
 
-5. **Configure Trigger**:
-   - Add an Alexa Skills Kit trigger
-   - You'll get the skill ID from the Alexa Developer Console in the next step
+3. **Alexa Developer Console**:
+   - Configure Account Linking with Google OAuth credentials
+   - Add interaction models (Spanish + English)
+   - Link Lambda function endpoint
+   - Enable testing
 
-### 3. Alexa Developer Console Setup
+4. **Update Legal Documents**:
+   - Edit `docs/PRIVACY_POLICY_EN.md` and `docs/TERMS_OF_USE_EN.md`
+   - Replace `[YOUR-EMAIL@example.com]` with your contact email
+   - Replace `[YOUR-GITHUB-REPO-URL]` with your repository URL
+   - Publish to GitHub to get public URLs for skill submission
 
-1. **Create a New Skill**:
-   - Go to [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
-   - Click "Create Skill"
-   - Skill name: "Baby Milk Tracker" (or "Rastreador de Leche del Bebé")
-   - Choose "Custom" model
-   - Choose "Alexa-hosted (Node.js)" or "Provision your own"
-   - Click "Create skill"
+## How It Works
 
-2. **Configure the Skill**:
-   - Go to "Build" > "Interaction Model" > "JSON Editor"
-   - For Spanish: Copy contents of `skill-package/interactionModels/custom/es-ES.json`
-   - For English: Add locale and copy contents of `skill-package/interactionModels/custom/en-US.json`
-   - Click "Save Model" and "Build Model"
+### OAuth Account Linking Flow
 
-3. **Configure Endpoint**:
-   - Go to "Build" > "Endpoint"
-   - Choose "AWS Lambda ARN"
-   - Default Region: Enter your Lambda function ARN
-   - Example: `arn:aws:lambda:us-east-1:123456789012:function:baby-milk-tracker`
-   - Click "Save Endpoints"
+1. User enables the skill in the Alexa app
+2. Alexa prompts user to link their Google account
+3. User authenticates with Google OAuth
+4. Skill receives access token from Alexa
+5. On first use, skill automatically creates a personal spreadsheet in user's Google Drive
+6. Spreadsheet ID is stored in DynamoDB for future requests
+7. All feeding data is written to the user's personal spreadsheet
 
-4. **Copy Skill ID**:
-   - From the Alexa Developer Console, copy your Skill ID
-   - Go back to your Lambda function
-   - Add this Skill ID to the Alexa Skills Kit trigger
+### Data Privacy
 
-### 4. Initialize Google Sheet
+- **Minimal Storage**: Only user ID and spreadsheet ID stored in DynamoDB
+- **User-Owned Data**: All feeding records stay in the user's Google Sheets
+- **No Sharing**: Each user's data is completely isolated
+- **User Control**: Users can delete their spreadsheet anytime
 
-Run this once to set up the spreadsheet headers:
+## Logging
 
-```javascript
-// You can add this as a one-time Lambda test event
-const { initializeSpreadsheet } = require('./src/utils/sheets');
-await initializeSpreadsheet();
-```
+Production-ready logging system controlled by `LOG_LEVEL` environment variable:
 
-Or manually add these headers to row 1 of the "Feedings" sheet:
-- A1: `Timestamp`
-- B1: `Type`
-- C1: `Amount (ml)`
-- D1: `Duration (min)`
-- E1: `Notes`
+| Level | Use Case | What Gets Logged |
+|-------|----------|------------------|
+| `ERROR` | Production (default) | Only errors |
+| `INFO` | Staging/Monitoring | Errors + important events |
+| `DEBUG` | Development | Everything including request details |
+
+See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 
 ## Testing
 
-### Test in Alexa Developer Console
+### First Time Setup
 
-1. Go to "Test" tab
-2. Enable testing for "Development"
-3. Try these utterances:
+1. Enable the skill in the Alexa app
+2. You'll be prompted to link your Google account
+3. Authenticate with Google and grant permissions
+4. Open the skill: "Alexa, abre Bitácora del Bebé"
+5. Skill will automatically create your personal spreadsheet
 
-**Spanish:**
-- "abre rastreador de leche"
-- "registra toma de pecho" → "sí"
-- "anota biberón con leche materna de 120 mililitros" → "sí"
-- "registra biberón con fórmula" → "sí"
-- "cuál fue la última toma"
-- "dame el resumen del día"
+### Example Utterances
 
-**English:**
-- "open milk tracker"
-- "register breastfeeding" → "yes"
-- "log bottle with breast milk of 120 milliliters" → "yes"
-- "register bottle with formula" → "yes"
-- "what was the last feeding"
-- "give me today's summary"
+**Spanish** (primary language):
+- "Alexa, abre Bitácora del Bebé"
+- "Registra toma de pecho" → "sí"
+- "Registra biberón de leche materna de 120 mililitros" → "sí"
+- "Registra biberón de fórmula de 90 mililitros" → "sí"
+- "Registra regurgitación" → "sí"
+- "¿Cuál fue la última toma?"
+- "Dame el resumen del día"
+- "Actualiza la última entrada con 100 mililitros" → "sí"
 
-### Test on Device
+**English**:
+- "Alexa, open Baby Tracker"
+- "Register breastfeeding" → "yes"
+- "Register bottle of breast milk 120 milliliters" → "yes"
+- "What was the last feeding?"
+- "Give me today's summary"
 
-Once configured, you can test on any Alexa-enabled device linked to your Amazon account.
+### Testing Notes
+
+- First invocation creates your spreadsheet (takes ~3 seconds)
+- Subsequent requests are faster
+- Check your Google Drive for the "Bitácora del Bebé" spreadsheet
+- All timestamps use your Alexa device's timezone
 
 ## Data Schema
 
@@ -191,14 +212,16 @@ Data is stored in Google Sheets with the following structure:
 
 | Timestamp | Type | Amount (ml) | Duration (min) | Notes |
 |-----------|------|-------------|----------------|-------|
-| 2025-11-15T10:30:00.000Z | PECHO | | | |
-| 2025-11-15T13:45:00.000Z | BIBERON_LECHE | 120 | | |
-| 2025-11-15T17:15:00.000Z | BIBERON_FORMULA | 150 | | |
+| 2024-11-17T10:30:00.000Z | PECHO | | | |
+| 2024-11-17T13:45:00.000Z | BIBERON_LECHE | 120 | | |
+| 2024-11-17T17:15:00.000Z | BIBERON_FORMULA | 150 | | |
+| 2024-11-17T18:00:00.000Z | REGURGITACION | | | |
 
 **Types:**
 - `PECHO`: Breastfeeding
 - `BIBERON_LECHE`: Bottle with breast milk
 - `BIBERON_FORMULA`: Bottle with formula
+- `REGURGITACION`: Regurgitation
 
 ## Customization
 
@@ -207,76 +230,128 @@ Data is stored in Google Sheets with the following structure:
 1. Add locale strings to `lambda/src/utils/strings.js`
 2. Create new interaction model in `skill-package/interactionModels/custom/{locale}.json`
 3. Update skill manifest in `skill-package/skill.json`
+4. Test with native speakers
 
-### Modifying Data Storage
+### Extending Features
 
-The Google Sheets integration is in `lambda/src/utils/sheets.js`. You can:
-- Switch to DynamoDB by using ASK SDK's built-in persistence adapter
-- Add more fields (duration for breastfeeding, notes, etc.)
-- Implement data export features
+The codebase is modular and easy to extend:
+- **Add tracking types**: Modify `sheets.js` and add handlers
+- **Custom reports**: Add new query handlers in `query.js`
+- **Notifications**: Use Alexa Proactive Events API
+- **Data export**: Add CSV/PDF generation
+- **Mobile app**: Create companion app using Google Sheets API
 
-### Adding Features
+### Development Tips
 
-Consider adding:
-- Duration tracking for breastfeeding
-- Left/right breast tracking
-- Diaper change tracking
-- Sleep tracking
-- Export to CSV
-- Weekly/monthly summaries
-- Reminders for next feeding
+- Use `LOG_LEVEL=DEBUG` for detailed logs during development
+- Test OAuth flow in incognito mode
+- Use DynamoDB local for offline testing
+- Check CloudWatch Logs frequently
 
 ## Troubleshooting
 
-### "Sorry, I couldn't save the information"
+**For detailed troubleshooting, see [TROUBLESHOOTING_OAUTH.md](docs/TROUBLESHOOTING_OAUTH.md)**.
 
-- Check Lambda CloudWatch logs for errors
-- Verify `GOOGLE_CREDENTIALS` environment variable is valid JSON
-- Verify `SPREADSHEET_ID` is correct
-- Ensure service account has Editor access to the spreadsheet
-- Check that the "Feedings" sheet exists
+### "Unable to link account"
 
-### "Sorry, I didn't understand that"
+1. Verify OAuth redirect URLs match exactly between Google Console and Alexa
+2. Check Google OAuth consent screen is published (not in testing)
+3. Ensure both required scopes are added:
+   - `https://www.googleapis.com/auth/spreadsheets`
+   - `https://www.googleapis.com/auth/drive.metadata.readonly`
+4. Clear browser cache and try again in incognito mode
 
-- Check that your utterance matches the interaction model
-- Verify the correct locale is being used
-- Check Lambda logs for intent matching issues
+### "Error creating spreadsheet"
+
+1. Check CloudWatch logs with `LOG_LEVEL=DEBUG`
+2. Verify OAuth token has correct permissions
+3. Ensure Google Sheets API and Drive API are enabled
+4. Check Lambda has permissions for DynamoDB
+
+### "Writing to deleted spreadsheet"
+
+1. Unlink and relink your account in Alexa app
+2. Or manually delete DynamoDB entry:
+   ```bash
+   aws dynamodb delete-item \
+     --table-name BabyTrackerUsers \
+     --key '{"userId": {"S": "your-alexa-user-id"}}'
+   ```
 
 ### Skill not responding
 
-- Verify Lambda function ARN in Alexa Developer Console
-- Check Lambda function has Alexa Skills Kit trigger configured
-- Verify Skill ID is added to Lambda trigger
-- Check Lambda function timeout (increase if needed)
+- Verify Lambda has Alexa Skills Kit trigger with correct Skill ID
+- Check Lambda timeout (recommended: 10 seconds)
+- Review CloudWatch logs for errors
+- Ensure Lambda execution role has DynamoDB permissions
 
 ## Cost Considerations
 
-- **AWS Lambda**: Free tier includes 1M requests/month
-- **Google Sheets API**: Free (daily quota: 500 requests/100 seconds per project)
-- **Alexa Skills**: Free for development and personal use
+**For 1000 users making 10 requests/day each:**
+
+- **AWS Lambda**: ~$0.20/month (10K requests, 256MB, 2s avg)
+- **DynamoDB**: ~$1.25/month (on-demand, 1000 items, 300KB storage)
+- **CloudWatch Logs**: ~$0.50/month (50MB at ERROR level)
+- **Google Sheets/Drive API**: Free (within quota limits)
+- **Alexa Skills**: Free
+- **Total**: ~$2/month
+
+Free tiers cover most development and personal use scenarios.
 
 ## Privacy & Security
 
-- Data is stored in your personal Google Sheets account
-- No data is sent to third parties
-- Service account credentials should be kept secure
-- Consider encrypting environment variables in Lambda
+- **User Data**: All feeding records stored in user's own Google Sheets (not on our servers)
+- **Minimal Storage**: Only user ID + spreadsheet ID in DynamoDB
+- **OAuth**: Standard Google OAuth 2.0 flow
+- **No Tracking**: No analytics or third-party data sharing
+- **User Control**: Users own and control their data completely
+- **Encryption**: Lambda environment variables encrypted at rest
+- **Compliance**: GDPR and CCPA friendly architecture
+
+See [PRIVACY_POLICY_EN.md](docs/PRIVACY_POLICY_EN.md) for details.
 
 ## License
 
 MIT License - Feel free to modify and use for personal or commercial purposes.
 
+## Documentation
+
+All documentation is located in the [`docs/`](docs/) folder:
+
+- **[ACCOUNT_LINKING_SETUP.md](docs/ACCOUNT_LINKING_SETUP.md)** - Complete OAuth setup guide
+- **[PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md)** - Production deployment guide
+- **[TROUBLESHOOTING_OAUTH.md](docs/TROUBLESHOOTING_OAUTH.md)** - OAuth troubleshooting
+- **[PRIVACY_POLICY_EN.md](docs/PRIVACY_POLICY_EN.md)** / **[ES](docs/PRIVACY_POLICY_ES.md)** - Privacy policies
+- **[TERMS_OF_USE_EN.md](docs/TERMS_OF_USE_EN.md)** / **[ES](docs/TERMS_OF_USE_ES.md)** - Terms of use
+- **[QUICKSTART.md](docs/QUICKSTART.md)** - Quick start guide
+- **[CHANGELOG.md](docs/CHANGELOG.md)** - Version history
+- **[DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md)** - Pre-deployment checklist
+
 ## Support
 
 For issues or questions:
-1. Check CloudWatch logs in AWS Lambda
-2. Review Alexa Developer Console test simulator
-3. Verify Google Sheets API permissions
+1. Check the troubleshooting guides above
+2. Review CloudWatch logs (set `LOG_LEVEL=DEBUG`)
+3. Verify account linking in Alexa app
+4. Open an issue on GitHub
 
 ## Contributing
 
-Contributions welcome! Please consider:
-- Adding more languages
-- Improving voice interactions
-- Adding data visualization
-- Creating mobile companion app
+Contributions welcome! Areas for improvement:
+- Additional languages (French, German, Portuguese, etc.)
+- Enhanced voice interactions
+- Data visualization/charts
+- Mobile companion app
+- Integration with other baby tracking apps
+- Weekly/monthly summary reports
+
+## Roadmap
+
+- [ ] Multi-baby support
+- [ ] Sleep tracking
+- [ ] Diaper tracking
+- [ ] Growth tracking (weight, height)
+- [ ] Weekly email summaries
+- [ ] Data export (CSV, PDF)
+- [ ] Alexa notifications/reminders
+- [ ] Integration with pediatrician systems

@@ -5,6 +5,8 @@
 
 const { getLastFeeding, getTodayFeedings } = require('../utils/sheets');
 const { getDeviceTimezone, formatTimeInTimezone } = require('../utils/timezone');
+const { getUserContext } = require('../utils/accountLinking');
+const logger = require('../utils/logger');
 
 /**
  * Get localized type string
@@ -34,8 +36,14 @@ const LastFeedingIntentHandler = {
   async handle(handlerInput) {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
 
+    // Check account linking and get user context
+    const userContext = await getUserContext(handlerInput);
+    if (!userContext.ready) {
+      return userContext.response;
+    }
+
     try {
-      const lastFeeding = await getLastFeeding();
+      const lastFeeding = await getLastFeeding(userContext.spreadsheetId, userContext.accessToken);
 
       if (!lastFeeding) {
         return handlerInput.responseBuilder
@@ -64,7 +72,7 @@ const LastFeedingIntentHandler = {
         .getResponse();
 
     } catch (error) {
-      console.error('Error getting last feeding:', error);
+      logger.error('Error getting last feeding:', error);
 
       return handlerInput.responseBuilder
         .speak(t('ERROR_SHEETS'))
@@ -84,8 +92,14 @@ const DailySummaryIntentHandler = {
   async handle(handlerInput) {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
 
+    // Check account linking and get user context
+    const userContext = await getUserContext(handlerInput);
+    if (!userContext.ready) {
+      return userContext.response;
+    }
+
     try {
-      const feedings = await getTodayFeedings();
+      const feedings = await getTodayFeedings(userContext.spreadsheetId, userContext.accessToken);
 
       if (feedings.length === 0) {
         return handlerInput.responseBuilder
@@ -159,7 +173,7 @@ const DailySummaryIntentHandler = {
         .getResponse();
 
     } catch (error) {
-      console.error('Error getting daily summary:', error);
+      logger.error('Error getting daily summary:', error);
 
       return handlerInput.responseBuilder
         .speak(t('ERROR_SHEETS'))

@@ -3,6 +3,8 @@
  * Gets device timezone and formats times appropriately
  */
 
+const logger = require('./logger');
+
 /**
  * Get the user's timezone from their Alexa device
  * @param {object} handlerInput - Alexa handler input
@@ -13,7 +15,7 @@ async function getDeviceTimezone(handlerInput) {
     const { serviceClientFactory, requestEnvelope } = handlerInput;
 
     if (!serviceClientFactory) {
-      console.warn('Service client factory not available');
+      logger.debug('Service client factory not available, using UTC');
       return 'UTC';
     }
 
@@ -21,11 +23,11 @@ async function getDeviceTimezone(handlerInput) {
     const upsServiceClient = serviceClientFactory.getUpsServiceClient();
 
     const timezone = await upsServiceClient.getSystemTimeZone(deviceId);
-    console.log('Device timezone:', timezone);
+    logger.debug('Device timezone:', timezone);
 
     return timezone || 'UTC';
   } catch (error) {
-    console.error('Error getting device timezone:', error);
+    logger.debug('Error getting device timezone, using UTC:', error.message);
     return 'UTC'; // Fallback to UTC
   }
 }
@@ -50,7 +52,7 @@ function formatTimeInTimezone(date, timezone = 'UTC') {
 
     return formatter.format(dateObj);
   } catch (error) {
-    console.error('Error formatting time:', error);
+    logger.debug('Error formatting time, using fallback:', error.message);
     // Fallback to simple UTC formatting
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const hours = dateObj.getUTCHours();
@@ -84,7 +86,7 @@ function formatDateTimeInTimezone(date, timezone = 'UTC', locale = 'es-ES') {
 
     return formatter.format(dateObj);
   } catch (error) {
-    console.error('Error formatting date/time:', error);
+    logger.debug('Error formatting date/time, using fallback:', error.message);
     return date.toString();
   }
 }
