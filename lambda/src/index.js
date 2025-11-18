@@ -31,6 +31,15 @@ const {
   DailySummaryIntentHandler
 } = require('./handlers/query');
 
+const {
+  RegistrarInicioSueñoIntentHandler,
+  RegistrarFinSueñoIntentHandler,
+  ConsultarUltimoSueñoIntentHandler,
+  ConsultarSueñoDelDiaIntentHandler,
+  SleepYesIntentHandler,
+  SleepNoIntentHandler
+} = require('./handlers/sleep');
+
 // Import interceptors
 const LocalizationInterceptor = require('./interceptors/localization');
 
@@ -77,6 +86,16 @@ try {
       RegisterBottleFormulaIntentHandler,
       RegisterRegurgitacionIntentHandler,
       UpdateLastEntryIntentHandler,
+
+      // Sleep tracking handlers
+      RegistrarInicioSueñoIntentHandler,
+      RegistrarFinSueñoIntentHandler,
+      ConsultarUltimoSueñoIntentHandler,
+      ConsultarSueñoDelDiaIntentHandler,
+
+      // Confirmation handlers (order matters - sleep-specific before general)
+      SleepYesIntentHandler,
+      SleepNoIntentHandler,
       YesIntentHandler,
       NoIntentHandler,
 

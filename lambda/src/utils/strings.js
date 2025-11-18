@@ -78,6 +78,31 @@ module.exports = {
     REMINDER_PERMISSION_REQUEST: 'Toma registrada! ¿Te gustaría que te recuerde cada 3 horas cuando es hora de alimentar al bebé?',
     REMINDER_PERMISSION_CARD: 'Para recibir recordatorios de alimentación, necesito tu permiso. Por favor habilita los permisos de recordatorios en la aplicación Alexa.',
 
+    // Sleep tracking - Start
+    SLEEP_START_CONFIRM: '¿Confirmas que el bebé se durmió?',
+    SLEEP_START_REGISTERED: 'Perfecto. Inicio de sueño registrado a las {time}.',
+    SLEEP_START_CANCELLED: 'De acuerdo, no registraré el inicio de sueño.',
+    SLEEP_ALREADY_ACTIVE: 'Ya hay una sesión de sueño activa desde las {time}. ¿Quieres terminar esa sesión y empezar una nueva?',
+
+    // Sleep tracking - End
+    SLEEP_END_CONFIRM: '¿Confirmas que el bebé se despertó?',
+    SLEEP_END_REGISTERED: 'Perfecto. El bebé durmió {duration}, desde las {startTime} hasta las {endTime}.',
+    SLEEP_END_CANCELLED: 'De acuerdo, no registraré el fin de sueño.',
+    SLEEP_NO_ACTIVE_SESSION: 'No hay ninguna sesión de sueño activa. ¿Quieres que te ayude a registrar una siesta que ya terminó?',
+    SLEEP_SHORT_WARNING: 'El bebé durmió solo {duration}. ¿Confirmas que se despertó?',
+
+    // Sleep tracking - Queries
+    LAST_SLEEP: 'La última siesta fue de {duration}, desde las {startTime} hasta las {endTime}.',
+    LAST_SLEEP_ONGOING: 'El bebé está durmiendo ahora, desde las {startTime}. Lleva {duration} dormido.',
+    NO_SLEEP_TODAY: 'No hay siestas registradas hoy.',
+    DAILY_SLEEP_SUMMARY: 'Hoy el bebé ha dormido {count} {napWord} con un total de {totalDuration}.',
+    DAILY_SLEEP_WITH_ONGOING: 'Hoy el bebé ha dormido {count} {napWord} con un total de {totalDuration}. Ahora está durmiendo desde las {currentStart}.',
+
+    // Sleep types
+    NAP_SINGULAR: 'siesta',
+    NAP_PLURAL: 'siestas',
+    TYPE_SLEEP: 'sueño',
+
     // Yes/No
     YES: 'sí',
     NO: 'no'
@@ -155,6 +180,31 @@ module.exports = {
     // Reminders
     REMINDER_PERMISSION_REQUEST: 'Feeding registered! Would you like me to remind you every 3 hours when it\'s time to feed the baby?',
     REMINDER_PERMISSION_CARD: 'To receive feeding reminders, I need your permission. Please enable reminder permissions in the Alexa app.',
+
+    // Sleep tracking - Start
+    SLEEP_START_CONFIRM: 'Do you confirm that baby fell asleep?',
+    SLEEP_START_REGISTERED: 'Perfect. Sleep start registered at {time}.',
+    SLEEP_START_CANCELLED: 'Okay, I won\'t register the sleep start.',
+    SLEEP_ALREADY_ACTIVE: 'There\'s already an active sleep session since {time}. Do you want to end that session and start a new one?',
+
+    // Sleep tracking - End
+    SLEEP_END_CONFIRM: 'Do you confirm that baby woke up?',
+    SLEEP_END_REGISTERED: 'Perfect. Baby slept {duration}, from {startTime} until {endTime}.',
+    SLEEP_END_CANCELLED: 'Okay, I won\'t register the sleep end.',
+    SLEEP_NO_ACTIVE_SESSION: 'There\'s no active sleep session. Would you like me to help you register a nap that already ended?',
+    SLEEP_SHORT_WARNING: 'Baby only slept {duration}. Do you confirm they woke up?',
+
+    // Sleep tracking - Queries
+    LAST_SLEEP: 'The last nap was {duration}, from {startTime} until {endTime}.',
+    LAST_SLEEP_ONGOING: 'Baby is sleeping now, since {startTime}. They\'ve been asleep for {duration}.',
+    NO_SLEEP_TODAY: 'No naps registered today.',
+    DAILY_SLEEP_SUMMARY: 'Today baby has slept {count} {napWord} for a total of {totalDuration}.',
+    DAILY_SLEEP_WITH_ONGOING: 'Today baby has slept {count} {napWord} for a total of {totalDuration}. They\'re currently sleeping since {currentStart}.',
+
+    // Sleep types
+    NAP_SINGULAR: 'nap',
+    NAP_PLURAL: 'naps',
+    TYPE_SLEEP: 'sleep',
 
     // Yes/No
     YES: 'yes',

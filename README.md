@@ -6,15 +6,18 @@ An Alexa skill to track your baby's feeding information using Google Sheets. Eac
 
 - **Multiple Feeding Types**: Breastfeeding, bottle with breast milk, bottle with formula
 - **Regurgitation Tracking**: Log regurgitation events
+- **Sleep Tracking**: Record sleep sessions with automatic duration calculation
 - **Automatic Reminders**: Optional 3-hour feeding reminders via Alexa Reminders API
 - **Update Entries**: Modify the most recent feeding with amount or duration
 - **Query History**:
   - Check last feeding (`cuál fue la última toma`)
-  - Get daily summary (`dame el resumen del día`)
+  - Check last sleep session (`cuál fue la última siesta`)
+  - Get daily feeding summary (`dame el resumen del día`)
+  - Get daily sleep summary (`cuánto ha dormido hoy`)
 - **Timezone Support**: Automatically uses device timezone for accurate timestamps
 - **Multi-User Support**: Each user gets their own Google Sheets spreadsheet via OAuth
 - **Internationalization**: Spanish (es-ES) and English (en-US) support
-- **Confirmation Flow**: All feedings require Yes/No confirmation before recording
+- **Confirmation Flow**: All actions require Yes/No confirmation before recording
 
 ## Architecture
 
@@ -34,7 +37,8 @@ lola/
 │   │   ├── handlers/
 │   │   │   ├── basic.js            # Launch, Help, Stop, Error handlers
 │   │   │   ├── feeding.js          # Feeding registration handlers
-│   │   │   └── query.js            # Query handlers (last feeding, summary)
+│   │   │   ├── query.js            # Query handlers (last feeding, summary)
+│   │   │   └── sleep.js            # Sleep tracking handlers
 │   │   ├── interceptors/
 │   │   │   └── localization.js     # i18n request interceptor
 │   │   ├── utils/
@@ -43,6 +47,7 @@ lola/
 │   │   │   ├── logger.js           # Production logging utility
 │   │   │   ├── reminders.js        # Alexa Reminders API integration
 │   │   │   ├── sheets.js           # Google Sheets API integration
+│   │   │   ├── sleep.js            # Sleep tracking utilities
 │   │   │   ├── strings.js          # Localized strings (es-ES, en-US)
 │   │   │   └── timezone.js         # Timezone utilities
 │   │   └── index.js                # Main Lambda handler
@@ -185,6 +190,8 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 ### Example Utterances
 
 **Spanish** (primary language):
+
+*Feeding:*
 - "Alexa, abre Bitácora del Bebé"
 - "Registra toma de pecho" → "sí"
 - "Registra biberón de leche materna de 120 mililitros" → "sí"
@@ -194,12 +201,26 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 - "Dame el resumen del día"
 - "Actualiza la última entrada con 100 mililitros" → "sí"
 
+*Sleep:*
+- "Registra que se durmió" → "sí"
+- "El bebé se despertó" → "sí"
+- "¿Cuál fue la última siesta?"
+- "¿Cuánto ha dormido hoy?"
+
 **English**:
+
+*Feeding:*
 - "Alexa, open Baby's Log"
 - "Register breastfeeding" → "yes"
 - "Register bottle of breast milk 120 milliliters" → "yes"
 - "What was the last feeding?"
 - "Give me today's summary"
+
+*Sleep:*
+- "Register baby fell asleep" → "yes"
+- "Baby woke up" → "yes"
+- "What was the last nap?"
+- "How much has baby slept today?"
 
 ### Testing Notes
 
@@ -211,6 +232,8 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 ## Data Schema
 
 Data is stored in Google Sheets with the following structure:
+
+### Feeding Data (Main Sheet)
 
 | Timestamp | Type | Amount (ml) | Duration (min) | Notes |
 |-----------|------|-------------|----------------|-------|
@@ -224,6 +247,15 @@ Data is stored in Google Sheets with the following structure:
 - `BIBERON_LECHE`: Bottle with breast milk
 - `BIBERON_FORMULA`: Bottle with formula
 - `REGURGITACION`: Regurgitation
+
+### Sleep Data ("Sueño" / "Sleep" Sheet)
+
+| Start | End | Duration (min) | Duration (hours) | Notes |
+|-------|-----|----------------|------------------|-------|
+| 2024-11-17T14:00:00.000Z | 2024-11-17T16:30:00.000Z | 150 | 2.5 | |
+| 2024-11-17T19:00:00.000Z | 2024-11-17T20:15:00.000Z | 75 | 1.25 | |
+
+**Note:** The sleep sheet is automatically created on first sleep event (backward compatible).
 
 ## Customization
 
@@ -349,7 +381,7 @@ Contributions welcome! Areas for improvement:
 ## Roadmap
 
 - [x] **Alexa feeding reminders** - Automatic 3-hour notifications ✅
-- [ ] **Sleep tracking** - Log sleep sessions with duration
+- [x] **Sleep tracking** - Log sleep sessions with duration ✅
 - [ ] **Diaper tracking** - Track wet and dirty diapers
 - [ ] **Multi-baby support** - Track multiple children in one account
 - [ ] **Growth tracking** - Record weight, height, head circumference
