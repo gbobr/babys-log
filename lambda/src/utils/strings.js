@@ -6,7 +6,7 @@
 
 module.exports = {
   'es-ES': {
-    WELCOME: '¡Bienvenido a la Bitácora del Bebé! Puedes registrar tomas de pecho, biberones con leche materna o fórmula, y también regurgitaciones. ¿Qué quieres hacer?',
+    WELCOME: '¡Bienvenido a la Bitácora del Bebé! Puedo ayudarte a registrar alimentación, sueño y pañales. ¿Qué quieres hacer?',
     WELCOME_REPROMPT: '¿Quieres registrar una toma?',
 
     // Account linking
@@ -63,7 +63,7 @@ module.exports = {
     PROCESSING: 'Un momento, registrando...',
 
     // Help
-    HELP: 'Puedes registrar tomas diciendo: registra toma de pecho, el bebé tomó biberón con leche materna, anota biberón con fórmula, o registra regurgitación. También puedes preguntar: cuál fue la última toma, o dame el resumen del día. ¿Qué quieres hacer?',
+    HELP: 'Puedo ayudarte con cuatro cosas. Alimentación: registra toma de pecho, biberón con leche materna o fórmula. Sueño: registra que se durmió, o que se despertó. Pañales: registra pañal mojado, sucio, o mixto. También puedes preguntar por el último registro o el resumen del día de cualquier categoría. Y puedo enviarte recordatorios automáticos cada 3 horas para alimentar al bebé. ¿Qué quieres hacer?',
     HELP_REPROMPT: '¿Qué quieres hacer?',
 
     // Errors
@@ -106,13 +106,40 @@ module.exports = {
     NAP_PLURAL: 'siestas',
     TYPE_SLEEP: 'sueño',
 
+    // Diaper tracking - Wet diaper
+    WET_DIAPER_CONFIRM: '¿Confirmas que el bebé tiene pañal mojado?',
+    WET_DIAPER_REGISTERED: 'Perfecto. Pañal mojado registrado a las {time}.',
+    WET_DIAPER_CANCELLED: 'De acuerdo, no registraré el pañal mojado.',
+
+    // Diaper tracking - Dirty diaper
+    DIRTY_DIAPER_CONFIRM: '¿Confirmas que el bebé hizo popó?',
+    DIRTY_DIAPER_REGISTERED: 'Perfecto. Pañal sucio registrado a las {time}.',
+    DIRTY_DIAPER_CANCELLED: 'De acuerdo, no registraré el pañal sucio.',
+
+    // Diaper tracking - Mixed diaper
+    MIXED_DIAPER_CONFIRM: '¿Confirmas que el bebé tiene pañal mojado y sucio?',
+    MIXED_DIAPER_REGISTERED: 'Perfecto. Pañal mixto registrado a las {time}.',
+    MIXED_DIAPER_CANCELLED: 'De acuerdo, no registraré el pañal mixto.',
+
+    // Diaper tracking - Queries
+    LAST_DIAPER: 'El último cambio de pañal fue {type} a las {time}.',
+    NO_DIAPERS_TODAY: 'No hay pañales registrados hoy.',
+    DAILY_DIAPER_SUMMARY: 'Hoy has cambiado {count} {word}: {details}.',
+
+    // Diaper types
+    TYPE_WET_DIAPER: 'pañal mojado',
+    TYPE_DIRTY_DIAPER: 'pañal sucio',
+    TYPE_MIXED_DIAPER: 'pañal mojado y sucio',
+    DIAPER_SINGULAR: 'pañal',
+    DIAPER_PLURAL: 'pañales',
+
     // Yes/No
     YES: 'sí',
     NO: 'no'
   },
 
   'en-US': {
-    WELCOME: 'Welcome to Baby Milk Tracker! You can register breastfeeding, bottles with breast milk or formula, and also regurgitations. What would you like to do?',
+    WELCOME: 'Welcome to Baby\'s Log! I can help you track feeding, sleep, and diapers. What would you like to do?',
     WELCOME_REPROMPT: 'Would you like to register a feeding?',
 
     // Account linking
@@ -169,7 +196,7 @@ module.exports = {
     PROCESSING: 'One moment, registering...',
 
     // Help
-    HELP: 'You can register feedings by saying: register breastfeeding, baby had a bottle with breast milk, log formula bottle, or register regurgitation. You can also ask: what was the last feeding, or give me today\'s summary. What would you like to do?',
+    HELP: 'I can help you with four things. Feeding: register breastfeeding, bottles with breast milk or formula. Sleep: register baby fell asleep, or woke up. Diapers: register wet, dirty, or mixed diapers. You can also ask for the last entry or daily summary of any category. And I can send you automatic reminders every 3 hours to feed the baby. What would you like to do?',
     HELP_REPROMPT: 'What would you like to do?',
 
     // Errors
@@ -211,6 +238,33 @@ module.exports = {
     NAP_SINGULAR: 'nap',
     NAP_PLURAL: 'naps',
     TYPE_SLEEP: 'sleep',
+
+    // Diaper tracking - Wet diaper
+    WET_DIAPER_CONFIRM: 'Do you confirm that baby has a wet diaper?',
+    WET_DIAPER_REGISTERED: 'Perfect. Wet diaper registered at {time}.',
+    WET_DIAPER_CANCELLED: 'Okay, I won\'t register the wet diaper.',
+
+    // Diaper tracking - Dirty diaper
+    DIRTY_DIAPER_CONFIRM: 'Do you confirm that baby pooped?',
+    DIRTY_DIAPER_REGISTERED: 'Perfect. Dirty diaper registered at {time}.',
+    DIRTY_DIAPER_CANCELLED: 'Okay, I won\'t register the dirty diaper.',
+
+    // Diaper tracking - Mixed diaper
+    MIXED_DIAPER_CONFIRM: 'Do you confirm that baby has a wet and dirty diaper?',
+    MIXED_DIAPER_REGISTERED: 'Perfect. Mixed diaper registered at {time}.',
+    MIXED_DIAPER_CANCELLED: 'Okay, I won\'t register the mixed diaper.',
+
+    // Diaper tracking - Queries
+    LAST_DIAPER: 'The last diaper change was {type} at {time}.',
+    NO_DIAPERS_TODAY: 'No diapers registered today.',
+    DAILY_DIAPER_SUMMARY: 'Today you changed {count} {word}: {details}.',
+
+    // Diaper types
+    TYPE_WET_DIAPER: 'wet diaper',
+    TYPE_DIRTY_DIAPER: 'dirty diaper',
+    TYPE_MIXED_DIAPER: 'wet and dirty diaper',
+    DIAPER_SINGULAR: 'diaper',
+    DIAPER_PLURAL: 'diapers',
 
     // Yes/No
     YES: 'yes',

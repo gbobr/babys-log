@@ -7,13 +7,16 @@ An Alexa skill to track your baby's feeding information using Google Sheets. Eac
 - **Multiple Feeding Types**: Breastfeeding, bottle with breast milk, bottle with formula
 - **Regurgitation Tracking**: Log regurgitation events
 - **Sleep Tracking**: Record sleep sessions with automatic duration calculation
+- **Diaper Tracking**: Track wet, dirty, and mixed diaper changes with daily summaries
 - **Automatic Reminders**: Optional 3-hour feeding reminders via Alexa Reminders API
 - **Update Entries**: Modify the most recent feeding with amount or duration
 - **Query History**:
   - Check last feeding (`cuál fue la última toma`)
   - Check last sleep session (`cuál fue la última siesta`)
+  - Check last diaper change (`cuándo fue el último pañal`)
   - Get daily feeding summary (`dame el resumen del día`)
   - Get daily sleep summary (`cuánto ha dormido hoy`)
+  - Get daily diaper summary (`cuántos pañales hoy`)
 - **Timezone Support**: Automatically uses device timezone for accurate timestamps
 - **Multi-User Support**: Each user gets their own Google Sheets spreadsheet via OAuth
 - **Internationalization**: Spanish (es-ES) and English (en-US) support
@@ -38,7 +41,8 @@ lola/
 │   │   │   ├── basic.js            # Launch, Help, Stop, Error handlers
 │   │   │   ├── feeding.js          # Feeding registration handlers
 │   │   │   ├── query.js            # Query handlers (last feeding, summary)
-│   │   │   └── sleep.js            # Sleep tracking handlers
+│   │   │   ├── sleep.js            # Sleep tracking handlers
+│   │   │   └── diaper.js           # Diaper tracking handlers
 │   │   ├── interceptors/
 │   │   │   └── localization.js     # i18n request interceptor
 │   │   ├── utils/
@@ -48,6 +52,7 @@ lola/
 │   │   │   ├── reminders.js        # Alexa Reminders API integration
 │   │   │   ├── sheets.js           # Google Sheets API integration
 │   │   │   ├── sleep.js            # Sleep tracking utilities
+│   │   │   ├── diaper.js           # Diaper tracking utilities
 │   │   │   ├── strings.js          # Localized strings (es-ES, en-US)
 │   │   │   └── timezone.js         # Timezone utilities
 │   │   └── index.js                # Main Lambda handler
@@ -207,6 +212,13 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 - "¿Cuál fue la última siesta?"
 - "¿Cuánto ha dormido hoy?"
 
+*Diapers:*
+- "Registra pañal mojado" → "sí"
+- "Registra pañal sucio" → "sí"
+- "Registra pañal mixto" → "sí"
+- "¿Cuándo fue el último pañal?"
+- "¿Cuántos pañales hoy?"
+
 **English**:
 
 *Feeding:*
@@ -221,6 +233,13 @@ See [PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for details.
 - "Baby woke up" → "yes"
 - "What was the last nap?"
 - "How much has baby slept today?"
+
+*Diapers:*
+- "Register wet diaper" → "yes"
+- "Register dirty diaper" → "yes"
+- "Register mixed diaper" → "yes"
+- "When was the last diaper change?"
+- "How many diapers today?"
 
 ### Testing Notes
 
@@ -256,6 +275,21 @@ Data is stored in Google Sheets with the following structure:
 | 2024-11-17T19:00:00.000Z | 2024-11-17T20:15:00.000Z | 75 | 1.25 | |
 
 **Note:** The sleep sheet is automatically created on first sleep event (backward compatible).
+
+### Diaper Data ("Pañales" / "Diapers" Sheet)
+
+| Timestamp | Type | Notes | | |
+|-----------|------|-------|---|---|
+| 2024-11-17T10:15:00.000Z | MOJADO / WET | | | |
+| 2024-11-17T12:30:00.000Z | SUCIO / DIRTY | | | |
+| 2024-11-17T15:45:00.000Z | AMBOS / MIXED | | | |
+
+**Types:**
+- `MOJADO` / `WET`: Wet diaper (urine only)
+- `SUCIO` / `DIRTY`: Dirty diaper (bowel movement only)
+- `AMBOS` / `MIXED`: Mixed diaper (both)
+
+**Note:** The diaper sheet is automatically created on first diaper change (backward compatible).
 
 ## Customization
 
@@ -382,7 +416,7 @@ Contributions welcome! Areas for improvement:
 
 - [x] **Alexa feeding reminders** - Automatic 3-hour notifications ✅
 - [x] **Sleep tracking** - Log sleep sessions with duration ✅
-- [ ] **Diaper tracking** - Track wet and dirty diapers
+- [x] **Diaper tracking** - Track wet, dirty, and mixed diapers ✅
 - [ ] **Multi-baby support** - Track multiple children in one account
 - [ ] **Growth tracking** - Record weight, height, head circumference
 - [ ] **Weekly/monthly summaries** - Voice reports with statistics

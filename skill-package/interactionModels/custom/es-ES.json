@@ -506,6 +506,122 @@
             "consulta cuánto ha dormido",
             "consulte cuánto ha dormido"
           ]
+        },
+        {
+          "name": "RegistrarPanalMojadoIntent",
+          "slots": [],
+          "samples": [
+            "registra pañal mojado",
+            "anota pañal mojado",
+            "registre pañal mojado",
+            "anote pañal mojado",
+            "el bebé hizo pipí",
+            "el bebé orinó",
+            "pañal mojado",
+            "registra que hizo pipí",
+            "registre que hizo pipí",
+            "anota que orinó",
+            "anote que orinó",
+            "cambio de pañal mojado",
+            "registra orina",
+            "registre orina",
+            "que registre pañal mojado",
+            "que anote pañal mojado",
+            "hizo pipí",
+            "orinó",
+            "pipí",
+            "registra pipí",
+            "registre pipí"
+          ]
+        },
+        {
+          "name": "RegistrarPanalSucioIntent",
+          "slots": [],
+          "samples": [
+            "registra pañal sucio",
+            "anota pañal sucio",
+            "registre pañal sucio",
+            "anote pañal sucio",
+            "el bebé hizo caca",
+            "el bebé hizo popó",
+            "pañal sucio",
+            "registra que hizo caca",
+            "registre que hizo caca",
+            "anota que hizo popó",
+            "anote que hizo popó",
+            "cambio de pañal sucio",
+            "registra caca",
+            "registre caca",
+            "registra popó",
+            "registre popó",
+            "que registre pañal sucio",
+            "que anote pañal sucio",
+            "hizo caca",
+            "hizo popó",
+            "caca",
+            "popó"
+          ]
+        },
+        {
+          "name": "RegistrarPanalMixtoIntent",
+          "slots": [],
+          "samples": [
+            "registra pañal mixto",
+            "anota pañal mixto",
+            "registre pañal mixto",
+            "anote pañal mixto",
+            "pañal mojado y sucio",
+            "registra pañal mojado y sucio",
+            "registre pañal mojado y sucio",
+            "el bebé hizo ambos",
+            "hizo pipí y caca",
+            "hizo pipí y popó",
+            "que registre pañal mixto",
+            "que anote pañal mixto",
+            "ambos",
+            "los dos",
+            "pañal completo",
+            "cambio completo"
+          ]
+        },
+        {
+          "name": "ConsultarUltimoPanalIntent",
+          "slots": [],
+          "samples": [
+            "cuál fue el último cambio de pañal",
+            "último cambio de pañal",
+            "cuándo fue el último pañal",
+            "cuándo cambié el pañal",
+            "última vez que cambié el pañal",
+            "que me diga el último pañal",
+            "que consulte el último pañal",
+            "consulta el último pañal",
+            "consulte el último pañal",
+            "último pañal",
+            "cuándo fue el último cambio",
+            "información del último pañal"
+          ]
+        },
+        {
+          "name": "ConsultarPanalesDelDiaIntent",
+          "slots": [],
+          "samples": [
+            "cuántos pañales hoy",
+            "cuántos pañales cambié hoy",
+            "resumen de pañales del día",
+            "resumen de pañales",
+            "cuántos cambios de pañal hoy",
+            "dame el resumen de pañales",
+            "que me dé el resumen de pañales",
+            "que consulte los pañales del día",
+            "consulta los pañales del día",
+            "consulte los pañales del día",
+            "pañales de hoy",
+            "cambios de hoy",
+            "estadísticas de pañales",
+            "cuántos pañales",
+            "resumen pañales"
+          ]
         }
       ],
       "types": []

@@ -40,6 +40,14 @@ const {
   SleepNoIntentHandler
 } = require('./handlers/sleep');
 
+const {
+  RegistrarPanalMojadoIntentHandler,
+  RegistrarPanalSucioIntentHandler,
+  RegistrarPanalMixtoIntentHandler,
+  ConsultarUltimoPanalIntentHandler,
+  ConsultarPanalesDelDiaIntentHandler
+} = require('./handlers/diaper');
+
 // Import interceptors
 const LocalizationInterceptor = require('./interceptors/localization');
 
@@ -93,6 +101,11 @@ try {
       ConsultarUltimoSuenoIntentHandler,
       ConsultarSuenoDelDiaIntentHandler,
 
+      // Diaper tracking handlers
+      RegistrarPanalMojadoIntentHandler,
+      RegistrarPanalSucioIntentHandler,
+      RegistrarPanalMixtoIntentHandler,
+
       // Confirmation handlers (order matters - sleep-specific before general)
       SleepYesIntentHandler,
       SleepNoIntentHandler,
@@ -101,7 +114,9 @@ try {
 
       // Query handlers
       LastFeedingIntentHandler,
-      DailySummaryIntentHandler
+      DailySummaryIntentHandler,
+      ConsultarUltimoPanalIntentHandler,
+      ConsultarPanalesDelDiaIntentHandler
     )
     .addRequestInterceptors(...requestInterceptors)
     .addErrorHandlers(ErrorHandler)

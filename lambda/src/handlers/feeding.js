@@ -4,6 +4,7 @@
  */
 
 const { appendFeeding, getLastFeeding, updateLastFeeding } = require('../utils/sheets');
+const { appendDiaperChange } = require('../utils/diaper');
 const { getDeviceTimezone, formatTimeInTimezone } = require('../utils/timezone');
 const { getUserContext } = require('../utils/accountLinking');
 const { scheduleNextFeedingReminder, shouldAskForPermission, markPermissionAsked, hasReminderPermission } = require('../utils/reminders');
@@ -289,6 +290,24 @@ const YesIntentHandler = {
           await appendFeeding(userContext.spreadsheetId, userContext.accessToken, type, null, null);
           break;
 
+        case 'WET_DIAPER':
+          type = userContext.locale === 'es-ES' ? 'MOJADO' : 'WET';
+          responseKey = 'WET_DIAPER_REGISTERED';
+          await appendDiaperChange(userContext.spreadsheetId, userContext.accessToken, type, null, userContext.locale);
+          break;
+
+        case 'DIRTY_DIAPER':
+          type = userContext.locale === 'es-ES' ? 'SUCIO' : 'DIRTY';
+          responseKey = 'DIRTY_DIAPER_REGISTERED';
+          await appendDiaperChange(userContext.spreadsheetId, userContext.accessToken, type, null, userContext.locale);
+          break;
+
+        case 'MIXED_DIAPER':
+          type = userContext.locale === 'es-ES' ? 'AMBOS' : 'MIXED';
+          responseKey = 'MIXED_DIAPER_REGISTERED';
+          await appendDiaperChange(userContext.spreadsheetId, userContext.accessToken, type, null, userContext.locale);
+          break;
+
         case 'UPDATE_ENTRY':
           // Update the last entry with amount or duration
           const updateAmount = sessionAttributes.updateAmount;
@@ -434,6 +453,15 @@ const NoIntentHandler = {
         break;
       case 'REGURGITATION':
         responseKey = 'REGURGITATION_CANCELLED';
+        break;
+      case 'WET_DIAPER':
+        responseKey = 'WET_DIAPER_CANCELLED';
+        break;
+      case 'DIRTY_DIAPER':
+        responseKey = 'DIRTY_DIAPER_CANCELLED';
+        break;
+      case 'MIXED_DIAPER':
+        responseKey = 'MIXED_DIAPER_CANCELLED';
         break;
       case 'UPDATE_ENTRY':
         responseKey = 'UPDATE_CANCELLED';

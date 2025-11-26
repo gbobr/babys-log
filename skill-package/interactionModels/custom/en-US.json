@@ -454,6 +454,116 @@
             "check how much baby has slept",
             "get how much baby has slept"
           ]
+        },
+        {
+          "name": "RegistrarPanalMojadoIntent",
+          "slots": [],
+          "samples": [
+            "register wet diaper",
+            "log wet diaper",
+            "record wet diaper",
+            "baby peed",
+            "baby urinated",
+            "wet diaper",
+            "register baby peed",
+            "record baby peed",
+            "log baby peed",
+            "diaper is wet",
+            "register pee",
+            "record pee",
+            "to register wet diaper",
+            "to log wet diaper",
+            "to record wet diaper",
+            "wet diaper change",
+            "peed",
+            "urinated",
+            "baby went pee"
+          ]
+        },
+        {
+          "name": "RegistrarPanalSucioIntent",
+          "slots": [],
+          "samples": [
+            "register dirty diaper",
+            "log dirty diaper",
+            "record dirty diaper",
+            "baby pooped",
+            "baby had a bowel movement",
+            "dirty diaper",
+            "register baby pooped",
+            "record baby pooped",
+            "log baby pooped",
+            "diaper is dirty",
+            "register poop",
+            "record poop",
+            "to register dirty diaper",
+            "to log dirty diaper",
+            "to record dirty diaper",
+            "dirty diaper change",
+            "pooped",
+            "bowel movement",
+            "baby went poop",
+            "number two"
+          ]
+        },
+        {
+          "name": "RegistrarPanalMixtoIntent",
+          "slots": [],
+          "samples": [
+            "register mixed diaper",
+            "log mixed diaper",
+            "record mixed diaper",
+            "wet and dirty diaper",
+            "register wet and dirty diaper",
+            "record wet and dirty diaper",
+            "baby did both",
+            "peed and pooped",
+            "to register mixed diaper",
+            "to log mixed diaper",
+            "to record mixed diaper",
+            "both",
+            "full diaper",
+            "complete diaper change"
+          ]
+        },
+        {
+          "name": "ConsultarUltimoPanalIntent",
+          "slots": [],
+          "samples": [
+            "when was the last diaper change",
+            "last diaper change",
+            "when was the last diaper",
+            "when did I change the diaper",
+            "last time I changed the diaper",
+            "tell me the last diaper",
+            "check the last diaper",
+            "get the last diaper",
+            "last diaper",
+            "when was the last change",
+            "last diaper information",
+            "to check the last diaper"
+          ]
+        },
+        {
+          "name": "ConsultarPanalesDelDiaIntent",
+          "slots": [],
+          "samples": [
+            "how many diapers today",
+            "how many diapers did I change today",
+            "diaper summary for today",
+            "diaper summary",
+            "how many diaper changes today",
+            "give me the diaper summary",
+            "tell me the diaper summary",
+            "check today's diapers",
+            "get today's diapers",
+            "diapers today",
+            "changes today",
+            "diaper statistics",
+            "how many diapers",
+            "diaper report",
+            "to check today's diapers"
+          ]
         }
       ],
       "types": []
