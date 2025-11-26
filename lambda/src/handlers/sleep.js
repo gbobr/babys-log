@@ -4,7 +4,8 @@
  */
 
 const { getUserData } = require('../utils/dynamodb');
-const { getAccessToken } = require('../utils/accountLinking');
+const { getUserContext } = require('../utils/accountLinking');
+const { getDeviceTimezone, formatTimeInTimezone } = require('../utils/timezone');
 const {
   startSleepSession,
   endSleepSession,
@@ -15,35 +16,31 @@ const {
 const logger = require('../utils/logger');
 
 /**
- * RegistrarInicioSueñoIntent - Start sleep session
+ * RegistrarInicioSuenoIntent - Start sleep session
  */
-const RegistrarInicioSueñoIntentHandler = {
+const RegistrarInicioSuenoIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'RegistrarInicioSueñoIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'RegistrarInicioSuenoIntent';
   },
   async handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
 
     try {
       // Store intent in session for confirmation
-      sessionAttributes.pendingIntent = 'RegistrarInicioSueñoIntent';
+      sessionAttributes.pendingIntent = 'RegistrarInicioSuenoIntent';
       attributesManager.setSessionAttributes(sessionAttributes);
 
       // Check if there's already an active sleep session
-      const userContext = handlerInput.requestEnvelope.context.System.user;
-      const userId = userContext.userId;
-      const userData = await getUserData(userId);
+      const userContext = await getUserContext(handlerInput);
+      const userData = await getUserData(userContext.userId);
 
       if (userData && userData.activeSleepSessionStart) {
         // Format time for speech
-        const startTime = new Date(userData.activeSleepSessionStart);
-        const timeString = startTime.toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
+        const timezone = await getDeviceTimezone(handlerInput);
+        const timeString = formatTimeInTimezone(userData.activeSleepSessionStart, timezone);
 
         const speechText = t('SLEEP_ALREADY_ACTIVE', { time: timeString });
         return handlerInput.responseBuilder
@@ -69,22 +66,21 @@ const RegistrarInicioSueñoIntentHandler = {
 };
 
 /**
- * RegistrarFinSueñoIntent - End sleep session
+ * RegistrarFinSuenoIntent - End sleep session
  */
-const RegistrarFinSueñoIntentHandler = {
+const RegistrarFinSuenoIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'RegistrarFinSueñoIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'RegistrarFinSuenoIntent';
   },
   async handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
 
     try {
-      const userContext = handlerInput.requestEnvelope.context.System.user;
-      const userId = userContext.userId;
-      const userData = await getUserData(userId);
+      const userContext = await getUserContext(handlerInput);
+      const userData = await getUserData(userContext.userId);
 
       // Check if there's an active sleep session
       if (!userData || !userData.activeSleepSessionStart) {
@@ -101,7 +97,7 @@ const RegistrarFinSueñoIntentHandler = {
       const durationMinutes = Math.round((now - startTime) / 1000 / 60);
 
       // Store for confirmation
-      sessionAttributes.pendingIntent = 'RegistrarFinSueñoIntent';
+      sessionAttributes.pendingIntent = 'RegistrarFinSuenoIntent';
       attributesManager.setSessionAttributes(sessionAttributes);
 
       // Warn if nap is very short (less than 15 minutes)
@@ -131,22 +127,21 @@ const RegistrarFinSueñoIntentHandler = {
 };
 
 /**
- * ConsultarUltimoSueñoIntent - Query last sleep session
+ * ConsultarUltimoSuenoIntent - Query last sleep session
  */
-const ConsultarUltimoSueñoIntentHandler = {
+const ConsultarUltimoSuenoIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'ConsultarUltimoSueñoIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'ConsultarUltimoSuenoIntent';
   },
   async handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
 
     try {
-      const userContext = handlerInput.requestEnvelope.context.System.user;
-      const userId = userContext.userId;
-      const userData = await getUserData(userId);
+      const userContext = await getUserContext(handlerInput);
+      const userData = await getUserData(userContext.userId);
 
       if (!userData || !userData.spreadsheetId) {
         const speechText = t('ACCOUNT_LINKING_REQUIRED');
@@ -156,25 +151,14 @@ const ConsultarUltimoSueñoIntentHandler = {
           .getResponse();
       }
 
-      const accessToken = getAccessToken(handlerInput);
-      if (!accessToken) {
-        const speechText = t('ACCOUNT_LINKING_REQUIRED');
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .withLinkAccountCard()
-          .getResponse();
-      }
-
       // Check if there's an active sleep session
       if (userData.activeSleepSessionStart) {
+        const timezone = await getDeviceTimezone(handlerInput);
         const startTime = new Date(userData.activeSleepSessionStart);
         const now = new Date();
         const durationMinutes = Math.round((now - startTime) / 1000 / 60);
         const durationText = formatDuration(durationMinutes, sessionAttributes.locale || 'es-ES');
-        const timeString = startTime.toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
+        const timeString = formatTimeInTimezone(startTime, timezone);
 
         const speechText = t('LAST_SLEEP_ONGOING', {
           startTime: timeString,
@@ -189,7 +173,7 @@ const ConsultarUltimoSueñoIntentHandler = {
       // Get last completed sleep session
       const lastSleep = await getLastSleep(
         userData.spreadsheetId,
-        accessToken,
+        userContext.accessToken,
         sessionAttributes.locale || 'es-ES'
       );
 
@@ -201,16 +185,9 @@ const ConsultarUltimoSueñoIntentHandler = {
       }
 
       // Format times for speech
-      const startTime = new Date(lastSleep.startTime);
-      const endTime = new Date(lastSleep.endTime);
-      const startTimeString = startTime.toLocaleTimeString(
-        sessionAttributes.locale || 'es-ES',
-        { hour: '2-digit', minute: '2-digit' }
-      );
-      const endTimeString = endTime.toLocaleTimeString(
-        sessionAttributes.locale || 'es-ES',
-        { hour: '2-digit', minute: '2-digit' }
-      );
+      const timezone = await getDeviceTimezone(handlerInput);
+      const startTimeString = formatTimeInTimezone(lastSleep.startTime, timezone);
+      const endTimeString = formatTimeInTimezone(lastSleep.endTime, timezone);
       const durationText = formatDuration(
         lastSleep.durationMinutes,
         sessionAttributes.locale || 'es-ES'
@@ -237,33 +214,23 @@ const ConsultarUltimoSueñoIntentHandler = {
 };
 
 /**
- * ConsultarSueñoDelDiaIntent - Query today's sleep summary
+ * ConsultarSuenoDelDiaIntent - Query today's sleep summary
  */
-const ConsultarSueñoDelDiaIntentHandler = {
+const ConsultarSuenoDelDiaIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'ConsultarSueñoDelDiaIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'ConsultarSuenoDelDiaIntent';
   },
   async handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
 
     try {
-      const userContext = handlerInput.requestEnvelope.context.System.user;
-      const userId = userContext.userId;
-      const userData = await getUserData(userId);
+      const userContext = await getUserContext(handlerInput);
+      const userData = await getUserData(userContext.userId);
 
       if (!userData || !userData.spreadsheetId) {
-        const speechText = t('ACCOUNT_LINKING_REQUIRED');
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .withLinkAccountCard()
-          .getResponse();
-      }
-
-      const accessToken = getAccessToken(handlerInput);
-      if (!accessToken) {
         const speechText = t('ACCOUNT_LINKING_REQUIRED');
         return handlerInput.responseBuilder
           .speak(speechText)
@@ -279,7 +246,7 @@ const ConsultarSueñoDelDiaIntentHandler = {
       // Get today's sleep summary
       const summary = await getTodaySleep(
         userData.spreadsheetId,
-        accessToken,
+        userContext.accessToken,
         timezone,
         sessionAttributes.locale || 'es-ES'
       );
@@ -304,11 +271,8 @@ const ConsultarSueñoDelDiaIntentHandler = {
 
       // Check if there's an active sleep session
       if (userData.activeSleepSessionStart) {
-        const currentStart = new Date(userData.activeSleepSessionStart);
-        const currentStartString = currentStart.toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
+        const timezone = await getDeviceTimezone(handlerInput);
+        const currentStartString = formatTimeInTimezone(userData.activeSleepSessionStart, timezone);
 
         speechText = t('DAILY_SLEEP_WITH_ONGOING', {
           count: summary.count,
@@ -348,19 +312,18 @@ const SleepYesIntentHandler = {
     const sessionAttributes = attributesManager.getSessionAttributes();
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.YesIntent'
-      && (sessionAttributes.pendingIntent === 'RegistrarInicioSueñoIntent'
-          || sessionAttributes.pendingIntent === 'RegistrarFinSueñoIntent');
+      && (sessionAttributes.pendingIntent === 'RegistrarInicioSuenoIntent'
+          || sessionAttributes.pendingIntent === 'RegistrarFinSuenoIntent');
   },
   async handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
     const pendingIntent = sessionAttributes.pendingIntent;
 
     try {
-      const userContext = handlerInput.requestEnvelope.context.System.user;
-      const userId = userContext.userId;
-      const userData = await getUserData(userId);
+      const userContext = await getUserContext(handlerInput);
+      const userData = await getUserData(userContext.userId);
 
       if (!userData || !userData.spreadsheetId) {
         const speechText = t('ACCOUNT_LINKING_REQUIRED');
@@ -370,28 +333,17 @@ const SleepYesIntentHandler = {
           .getResponse();
       }
 
-      const accessToken = getAccessToken(handlerInput);
-      if (!accessToken) {
-        const speechText = t('ACCOUNT_LINKING_REQUIRED');
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .withLinkAccountCard()
-          .getResponse();
-      }
-
-      if (pendingIntent === 'RegistrarInicioSueñoIntent') {
+      if (pendingIntent === 'RegistrarInicioSuenoIntent') {
         // Start sleep session
         const { startTime } = await startSleepSession(
           userData.spreadsheetId,
-          accessToken,
-          userId,
+          userContext.accessToken,
+          userContext.userId,
           sessionAttributes.locale || 'es-ES'
         );
 
-        const timeString = new Date(startTime).toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
+        const timezone = await getDeviceTimezone(handlerInput);
+        const timeString = formatTimeInTimezone(startTime, timezone);
 
         const speechText = t('SLEEP_START_REGISTERED', { time: timeString });
 
@@ -403,7 +355,7 @@ const SleepYesIntentHandler = {
           .speak(speechText)
           .getResponse();
 
-      } else if (pendingIntent === 'RegistrarFinSueñoIntent') {
+      } else if (pendingIntent === 'RegistrarFinSuenoIntent') {
         // End sleep session
         if (!userData.activeSleepSessionStart) {
           const speechText = t('SLEEP_NO_ACTIVE_SESSION');
@@ -416,20 +368,15 @@ const SleepYesIntentHandler = {
 
         const result = await endSleepSession(
           userData.spreadsheetId,
-          accessToken,
-          userId,
+          userContext.accessToken,
+          userContext.userId,
           userData.activeSleepSessionStart,
           sessionAttributes.locale || 'es-ES'
         );
 
-        const startTimeString = new Date(result.startTime).toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
-        const endTimeString = new Date(result.endTime).toLocaleTimeString(
-          sessionAttributes.locale || 'es-ES',
-          { hour: '2-digit', minute: '2-digit' }
-        );
+        const timezone = await getDeviceTimezone(handlerInput);
+        const startTimeString = formatTimeInTimezone(result.startTime, timezone);
+        const endTimeString = formatTimeInTimezone(result.endTime, timezone);
         const durationText = formatDuration(
           result.durationMinutes,
           sessionAttributes.locale || 'es-ES'
@@ -470,20 +417,20 @@ const SleepNoIntentHandler = {
     const sessionAttributes = attributesManager.getSessionAttributes();
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.NoIntent'
-      && (sessionAttributes.pendingIntent === 'RegistrarInicioSueñoIntent'
-          || sessionAttributes.pendingIntent === 'RegistrarFinSueñoIntent');
+      && (sessionAttributes.pendingIntent === 'RegistrarInicioSuenoIntent'
+          || sessionAttributes.pendingIntent === 'RegistrarFinSuenoIntent');
   },
   handle(handlerInput) {
     const { attributesManager } = handlerInput;
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const t = handlerInput.t;
+    const { t } = attributesManager.getRequestAttributes();
     const pendingIntent = sessionAttributes.pendingIntent;
 
     let speechText;
 
-    if (pendingIntent === 'RegistrarInicioSueñoIntent') {
+    if (pendingIntent === 'RegistrarInicioSuenoIntent') {
       speechText = t('SLEEP_START_CANCELLED');
-    } else if (pendingIntent === 'RegistrarFinSueñoIntent') {
+    } else if (pendingIntent === 'RegistrarFinSuenoIntent') {
       speechText = t('SLEEP_END_CANCELLED');
     }
 
@@ -498,10 +445,10 @@ const SleepNoIntentHandler = {
 };
 
 module.exports = {
-  RegistrarInicioSueñoIntentHandler,
-  RegistrarFinSueñoIntentHandler,
-  ConsultarUltimoSueñoIntentHandler,
-  ConsultarSueñoDelDiaIntentHandler,
+  RegistrarInicioSuenoIntentHandler,
+  RegistrarFinSuenoIntentHandler,
+  ConsultarUltimoSuenoIntentHandler,
+  ConsultarSuenoDelDiaIntentHandler,
   SleepYesIntentHandler,
   SleepNoIntentHandler
 };

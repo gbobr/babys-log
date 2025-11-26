@@ -188,16 +188,14 @@
             "anote regurgitación",
             "el bebé regurgitó",
             "el bebé vomitó",
+            "el bebé devolvió",
+            "el bebé escupió",
             "registra vómito",
             "anota vómito",
             "registre vómito",
             "anote vómito",
-            "regurgitó",
-            "vomitó",
-            "el bebé devolvió",
             "registra que devolvió",
             "registre que devolvió",
-            "el bebé escupió",
             "registra que escupió",
             "registre que escupió",
             "que registre regurgitación",
@@ -315,7 +313,7 @@
           ]
         },
         {
-          "name": "RegistrarInicioSueñoIntent",
+          "name": "RegistrarInicioSuenoIntent",
           "slots": [],
           "samples": [
             "registra inicio de sueño",
@@ -379,7 +377,7 @@
           ]
         },
         {
-          "name": "RegistrarFinSueñoIntent",
+          "name": "RegistrarFinSuenoIntent",
           "slots": [],
           "samples": [
             "registra fin de sueño",
@@ -438,7 +436,7 @@
           ]
         },
         {
-          "name": "ConsultarUltimoSueñoIntent",
+          "name": "ConsultarUltimoSuenoIntent",
           "slots": [],
           "samples": [
             "cuál fue la última siesta",
@@ -475,7 +473,7 @@
           ]
         },
         {
-          "name": "ConsultarSueñoDelDiaIntent",
+          "name": "ConsultarSuenoDelDiaIntent",
           "slots": [],
           "samples": [
             "cuánto ha dormido hoy",

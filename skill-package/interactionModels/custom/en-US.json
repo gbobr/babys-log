@@ -168,13 +168,10 @@
             "baby spit up",
             "baby regurgitated",
             "baby vomited",
+            "baby threw up",
             "register spit up",
             "log spit up",
             "record spit up",
-            "spit up",
-            "regurgitated",
-            "vomited",
-            "baby threw up",
             "register throw up",
             "record throw up",
             "to register regurgitation",
@@ -276,7 +273,7 @@
           ]
         },
         {
-          "name": "RegistrarInicioSueñoIntent",
+          "name": "RegistrarInicioSuenoIntent",
           "slots": [],
           "samples": [
             "register sleep start",
@@ -333,7 +330,7 @@
           ]
         },
         {
-          "name": "RegistrarFinSueñoIntent",
+          "name": "RegistrarFinSuenoIntent",
           "slots": [],
           "samples": [
             "register sleep end",
@@ -388,7 +385,7 @@
           ]
         },
         {
-          "name": "ConsultarUltimoSueñoIntent",
+          "name": "ConsultarUltimoSuenoIntent",
           "slots": [],
           "samples": [
             "what was the last nap",
@@ -424,7 +421,7 @@
           ]
         },
         {
-          "name": "ConsultarSueñoDelDiaIntent",
+          "name": "ConsultarSuenoDelDiaIntent",
           "slots": [],
           "samples": [
             "how much has baby slept today",

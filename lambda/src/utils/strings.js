@@ -77,6 +77,9 @@ module.exports = {
     // Reminders
     REMINDER_PERMISSION_REQUEST: 'Toma registrada! ¿Te gustaría que te recuerde cada 3 horas cuando es hora de alimentar al bebé?',
     REMINDER_PERMISSION_CARD: 'Para recibir recordatorios de alimentación, necesito tu permiso. Por favor habilita los permisos de recordatorios en la aplicación Alexa.',
+    REMINDER_PERMISSION_GRANTED: 'Perfecto! Por favor revisa tu aplicación de Alexa para dar permisos de recordatorios. Una vez que otorgues el permiso, tu siguiente toma configurará los recordatorios.',
+    REMINDER_PERMISSION_DECLINED: 'De acuerdo, no configuraré recordatorios. Siempre puedes habilitarlos más tarde.',
+    REMINDER_PERMISSION_REPROMPT: '¿Te gustaría que te recuerde cuando alimentar al bebé?',
 
     // Sleep tracking - Start
     SLEEP_START_CONFIRM: '¿Confirmas que el bebé se durmió?',
@@ -180,6 +183,9 @@ module.exports = {
     // Reminders
     REMINDER_PERMISSION_REQUEST: 'Feeding registered! Would you like me to remind you every 3 hours when it\'s time to feed the baby?',
     REMINDER_PERMISSION_CARD: 'To receive feeding reminders, I need your permission. Please enable reminder permissions in the Alexa app.',
+    REMINDER_PERMISSION_GRANTED: 'Great! Please check your Alexa app to grant reminder permissions. Once you grant permission, your next feeding will set up the reminders.',
+    REMINDER_PERMISSION_DECLINED: 'Ok, I won\'t set up reminders. You can always enable them later.',
+    REMINDER_PERMISSION_REPROMPT: 'Would you like me to remind you when to feed the baby?',
 
     // Sleep tracking - Start
     SLEEP_START_CONFIRM: 'Do you confirm that baby fell asleep?',

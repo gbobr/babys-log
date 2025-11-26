@@ -32,10 +32,10 @@ const {
 } = require('./handlers/query');
 
 const {
-  RegistrarInicioSueñoIntentHandler,
-  RegistrarFinSueñoIntentHandler,
-  ConsultarUltimoSueñoIntentHandler,
-  ConsultarSueñoDelDiaIntentHandler,
+  RegistrarInicioSuenoIntentHandler,
+  RegistrarFinSuenoIntentHandler,
+  ConsultarUltimoSuenoIntentHandler,
+  ConsultarSuenoDelDiaIntentHandler,
   SleepYesIntentHandler,
   SleepNoIntentHandler
 } = require('./handlers/sleep');
@@ -88,10 +88,10 @@ try {
       UpdateLastEntryIntentHandler,
 
       // Sleep tracking handlers
-      RegistrarInicioSueñoIntentHandler,
-      RegistrarFinSueñoIntentHandler,
-      ConsultarUltimoSueñoIntentHandler,
-      ConsultarSueñoDelDiaIntentHandler,
+      RegistrarInicioSuenoIntentHandler,
+      RegistrarFinSuenoIntentHandler,
+      ConsultarUltimoSuenoIntentHandler,
+      ConsultarSuenoDelDiaIntentHandler,
 
       // Confirmation handlers (order matters - sleep-specific before general)
       SleepYesIntentHandler,

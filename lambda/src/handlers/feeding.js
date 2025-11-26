@@ -232,6 +232,17 @@ const YesIntentHandler = {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
+    // Check if responding to reminder permission request
+    if (sessionAttributes.awaitingReminderPermission) {
+      // User said "yes" to enabling reminders
+      sessionAttributes.awaitingReminderPermission = false;
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+      return handlerInput.responseBuilder
+        .speak(t('REMINDER_PERMISSION_GRANTED'))
+        .getResponse();
+    }
+
     const pendingIntent = sessionAttributes.pendingIntent;
     const amount = sessionAttributes.amount;
 
@@ -353,7 +364,7 @@ const YesIntentHandler = {
       if (shouldAskPermission) {
         responseBuilder
           .withAskForPermissionsConsentCard(['alexa::alerts:reminders:skill:readwrite'])
-          .reprompt(t('HELP_REPROMPT'))
+          .reprompt(t('REMINDER_PERMISSION_REPROMPT'))
           .withShouldEndSession(false);
       } else {
         responseBuilder.withShouldEndSession(true);
@@ -382,6 +393,17 @@ const NoIntentHandler = {
   handle(handlerInput) {
     const { t } = handlerInput.attributesManager.getRequestAttributes();
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+    // Check if responding to reminder permission request
+    if (sessionAttributes.awaitingReminderPermission) {
+      // User said "no" to enabling reminders
+      sessionAttributes.awaitingReminderPermission = false;
+      handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+      return handlerInput.responseBuilder
+        .speak(t('REMINDER_PERMISSION_DECLINED'))
+        .getResponse();
+    }
 
     const pendingIntent = sessionAttributes.pendingIntent;
 
